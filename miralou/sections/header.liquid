@@ -20,16 +20,21 @@
     <nav class="nav-desktop">
       {% for link in main_menu_linklist %}
         {% if link.links != blank %}
-          {% assign link_handle = link.handle | replace: '-', '_' %}
-          <div class="menu-item-wrapper" x-data="{ {{ link_handle }}: false }">
-            <button
-              type="button"
-              x-on:click="{{ link_handle }} = ! {{ link_handle }}"
-              class="menu-item"
-            >
-              {{ link.title }}
-              {% render 'icon-dropdown' %}
-            </button>
+          {% assign has_children = link.links | replace: '-', '_' %}
+          <div class="menu-item-wrapper">
+            {% if has_children %}
+              <button type="button" class="menu-item with-chevron">
+                {{ link.title }}
+                {% render 'icon-dropdown' %}
+              </button>
+              <div class="dropdown-menu">
+                {% for childlink in link.links %}
+                  <a href="{{ childlink.url }}" class="dropdown-link">{{ childlink.title }}</a>
+                {% endfor %}
+              </div>
+            {% else %}
+
+            {% endif %}
           </div>
         {% else %}
           <a href="{{ link.url }}" class="menu-item">{{ link.title }}</a>
