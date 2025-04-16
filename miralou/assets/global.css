@@ -51,6 +51,7 @@ body {
 /* Menu buttons */
 .menu-item-wrapper {
   position: relative;
+  margin: 0 2rem;
 }
 
 .menu-item {
@@ -138,4 +139,78 @@ body {
   width: 22px;
   height: 22px;
   stroke: #000;
+}
+
+/* FOOTER STYLES */
+.footer {
+  background-color: #f9f9f9;
+  padding: 1rem 6rem;
+  border-top: 1px solid #e0e0e0;
+  color: #333;
+  font-family: 'Poppins', sans-serif;
+}
+
+.footer__blocks {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 3rem;
+  justify-content: space-between;
+  margin-bottom: 2rem;
+}
+
+.footer__block {
+  flex: 1 1 200px;
+}
+
+.footer__logo-copy {
+  font-size: 14px;
+  color: #666;
+}
+
+.footer__nav-block h4,
+.footer__contact h4 {
+  font-size: 16px;
+  font-weight: 700;
+  margin-bottom: 1rem;
+  color: #000;
+}
+
+.footer__nav-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.footer__nav-list li {
+  margin-bottom: 0.5rem;
+}
+
+.footer__nav-list li a {
+  color: #333;
+  text-decoration: none;
+  font-size: 14px;
+  transition: color 0.2s ease;
+}
+
+.footer__nav-list li a:hover {
+  color: #e53935;
+}
+
+.footer__contact p {
+  font-size: 14px;
+  color: #444;
+  margin: 0.25rem 0;
+}
+
+.footer__bottom {
+  border-top: 1px solid #ddd;
+  padding-top: 1rem;
+}
+
+.footer__bottom-inner {
+  display: flex;
+  justify-content: space-between;
+  font-size: 14px;
+  color: #999;
+  text-transform: uppercase;
 }

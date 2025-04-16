@@ -19,9 +19,9 @@
 
     <nav class="nav-desktop">
       {% for link in main_menu_linklist %}
-        {% if link.links != blank %}
-          {% assign has_children = link.links | replace: '-', '_' %}
-          <div class="menu-item-wrapper">
+        <div class="menu-item-wrapper">
+          {% if link.links != blank %}
+            {% assign has_children = link.links | replace: '-', '_' %}
             {% if has_children %}
               <button type="button" class="menu-item with-chevron">
                 {{ link.title }}
@@ -35,10 +35,11 @@
             {% else %}
 
             {% endif %}
-          </div>
-        {% else %}
-          <a href="{{ link.url }}" class="menu-item">{{ link.title }}</a>
-        {% endif %}
+
+          {% else %}
+            <a href="{{ link.url }}" class="menu-item">{{ link.title }}</a>
+          {% endif %}
+        </div>
       {% endfor %}
     </nav>
 

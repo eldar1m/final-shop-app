@@ -1,0 +1,98 @@
+<footer class="footer">
+  <div class="footer__blocks page-width">
+    {% for block in section.blocks %}
+      <div class="footer__block footer__block--{{ block.type }}">
+        {% case block.type %}
+          {% when 'logo' %}
+            <div class="footer__logo-copy">
+              {{ block.settings.logo_copy }}
+            </div>
+          {% when 'navigation' %}
+            <div class="footer__nav-block">
+              <h4>{{ block.settings.nav_title }}</h4>
+              <ul class="footer__nav-list">
+                {% for link in linklists[block.settings.nav_menu].links %}
+                  <li>
+                    <a href="{{ link.url }}">{{ link.title }}</a>
+                  </li>
+                {% endfor %}
+              </ul>
+            </div>
+          {% when 'contact' %}
+            <div class="footer__contact">
+              <h4>{{ block.settings.contact_title }}</h4>
+              <p>{{ shop.address }}</p>
+              <p>{{ shop.email }}</p>
+              <p>{{ shop.phone }}</p>
+            </div>
+        {% endcase %}
+      </div>
+    {% endfor %}
+  </div>
+
+  <div class="footer__bottom">
+    <div class="footer__bottom-inner">
+      <span
+        >Copyright &copy; {{ 'now' | date: '%Y' }}
+        {{ shop.name -}}
+      </span>
+      <span>All rights reserved</span>
+    </div>
+  </div>
+</footer>
+
+{% schema %}
+{
+  "name": "Footer",
+  "max_blocks": 5,
+  "blocks": [
+    {
+      "type": "logo",
+      "name": "Logo Block",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "richtext",
+          "id": "logo_copy",
+          "label": "Text under logo"
+        }
+      ]
+    },
+    {
+      "type": "navigation",
+      "name": "Navigation Block",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "text",
+          "id": "nav_title",
+          "label": "Navigation Title"
+        },
+        {
+          "type": "link_list",
+          "id": "nav_menu",
+          "label": "Navigation Menu"
+        }
+      ]
+    },
+    {
+      "type": "contact",
+      "name": "Contact Block",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "text",
+          "id": "contact_title",
+          "label": "Contact Title"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Footer",
+      "category": "Footer"
+    }
+  ]
+}
+{% endschema %}
