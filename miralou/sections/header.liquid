@@ -1,0 +1,75 @@
+{% liquid
+  if section.settings.menu.links == blank
+    assign main_menu_linklist = linklists[section.settings.menu].links
+  else
+    assign main_menu_linklist = section.settings.menu.links
+  endif
+%}
+
+<header class="site-header">
+  <div class="page-width header__inner">
+    <a href="/" class="header__logo">
+      {% if section.settings.logo_mobile %}
+        <img src="{{ section.settings.logo_mobile | image_url }}" alt="Mobile Logo" class="logo--mobile">
+      {% endif %}
+      {% if section.settings.logo %}
+        <img src="{{ section.settings.logo | image_url }}" alt="Logo" class="logo--desktop">
+      {% endif %}
+    </a>
+
+    <nav class="nav-desktop">
+      {% for link in main_menu_linklist %}
+        {% if link.links != blank %}
+          {% assign link_handle = link.handle | replace: '-', '_' %}
+          <div class="menu-item-wrapper" x-data="{ {{ link_handle }}: false }">
+            <button
+              type="button"
+              x-on:click="{{ link_handle }} = ! {{ link_handle }}"
+              class="menu-item"
+            >
+              {{ link.title }}
+              {% render 'icon-dropdown' %}
+            </button>
+          </div>
+        {% else %}
+          <a href="{{ link.url }}" class="menu-item">{{ link.title }}</a>
+        {% endif %}
+      {% endfor %}
+    </nav>
+
+    <div class="header__icons">
+      <a href="{{ routes.search_url }}">
+        {% render 'icon-search' %}
+      </a>
+      <a href="{{ routes.cart_url }}">
+        {% render 'icon-favorite' %}
+      </a>
+      <a href="{{ routes.cart_url }}">
+        {% render 'icon-shopping-cart' %}
+      </a>
+    </div>
+  </div>
+</header>
+
+{% schema %}
+{
+  "name": "Header",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "logo",
+      "label": "Logo (Desktop)"
+    },
+    {
+      "type": "image_picker",
+      "id": "logo_mobile",
+      "label": "Logo (Mobile)"
+    },
+    {
+      "type": "link_list",
+      "id": "menu",
+      "label": "Navigation Menu"
+    }
+  ]
+}
+{% endschema %}
