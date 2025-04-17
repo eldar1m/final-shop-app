@@ -214,3 +214,114 @@ body {
   color: #999;
   text-transform: uppercase;
 }
+
+/* CUSTOM DARK FOOTER STYLES */
+.footer {
+  background-color: #1e1e1e;
+  padding: 4rem 6rem;
+  color: #fff;
+  font-family: 'Poppins', sans-serif;
+}
+
+.footer__blocks {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4rem;
+  justify-content: space-between;
+  margin-bottom: 3rem;
+}
+
+.footer__block {
+  flex: 1 1 250px;
+}
+
+.footer__logo-copy {
+  font-size: 15px;
+  color: #d1d1d1;
+  margin-top: 1rem;
+  max-width: 300px;
+}
+
+.footer__nav-block h4,
+.footer__contact h4 {
+  font-size: 16px;
+  font-weight: 700;
+  margin-bottom: 1.2rem;
+  color: #e53935;
+  text-transform: uppercase;
+}
+
+.footer__nav-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.footer__nav-list li {
+  margin-bottom: 0.6rem;
+}
+
+.footer__nav-list li a {
+  color: #fff;
+  text-decoration: none;
+  font-size: 15px;
+  transition: color 0.2s ease;
+}
+
+.footer__nav-list li a:hover {
+  color: #e53935;
+}
+
+.footer__contact p {
+  font-size: 15px;
+  color: #ddd;
+  margin: 0.4rem 0;
+}
+
+/* Footer bottom */
+.footer__bottom {
+  border-top: 1px solid #e53935;
+  padding-top: 1.5rem;
+  margin-top: 3rem;
+}
+
+.footer__bottom-inner {
+  display: flex;
+  justify-content: space-between;
+  font-size: 14px;
+  color: #fff;
+  text-transform: uppercase;
+  font-weight: 600;
+}
+
+.footer-contact-block {
+  color: #ffffff;
+}
+
+.footer-contact-title {
+  color: #ff0000;
+  font-weight: bold;
+  text-transform: uppercase;
+  margin-bottom: 1rem;
+}
+
+.footer-contact-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.footer-contact-list li {
+  display: flex;
+  align-items: center;
+  margin-bottom: 0.8rem;
+}
+
+.footer-icon {
+  color: #ff0000;
+  display: inline-flex;
+  align-items: center;
+  margin-right: 0.75rem;
+  width: 1.5rem;
+  height: 1.5rem;
+}

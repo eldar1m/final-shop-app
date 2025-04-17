@@ -19,11 +19,22 @@
               </ul>
             </div>
           {% when 'contact' %}
-            <div class="footer__contact">
-              <h4>{{ block.settings.contact_title }}</h4>
-              <p>{{ shop.address }}</p>
-              <p>{{ shop.email }}</p>
-              <p>{{ shop.phone }}</p>
+            <div class="footer-contact-block">
+              <h3 class="footer-contact-title">{{ block.settings.title | upcase }}</h3>
+              <ul class="footer-contact-list">
+                <li>
+                  <span class="footer-icon">{% render 'icon-location' %}</span>
+                  <span>{{ settings.address }}</span>
+                </li>
+                <li>
+                  <span class="footer-icon">{% render 'icon-phone' %}</span>
+                  <span>{{ settings.phone }}</span>
+                </li>
+                <li>
+                  <span class="footer-icon">{% render 'icon-email' %}</span>
+                  <span>{{ settings.email }}</span>
+                </li>
+              </ul>
             </div>
         {% endcase %}
       </div>
@@ -77,13 +88,14 @@
     },
     {
       "type": "contact",
-      "name": "Contact Block",
+      "name": "Contact",
       "limit": 1,
       "settings": [
         {
           "type": "text",
-          "id": "contact_title",
-          "label": "Contact Title"
+          "id": "title",
+          "label": "Title",
+          "default": "Contact us"
         }
       ]
     }

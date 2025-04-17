@@ -13,5 +13,28 @@
         "label": "Mobile logo image"
       }
     ]
+  },
+  {
+    "name": "Footer Contact Info",
+    "settings": [
+      {
+        "type": "text",
+        "id": "address",
+        "label": "Store address",
+        "default": "2715 Ash Dr. San Jose, South Dakota 83475"
+      },
+      {
+        "type": "text",
+        "id": "phone",
+        "label": "Phone number",
+        "default": "(808) 555-0111"
+      },
+      {
+        "type": "text",
+        "id": "email",
+        "label": "Email",
+        "default": "miralou.conacts@example.com"
+      }
+    ]
   }
 ]
