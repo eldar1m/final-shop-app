@@ -36,5 +36,15 @@
         "default": "miralou.conacts@example.com"
       }
     ]
+  },
+  {
+    "name": "Header Menu",
+    "settings": [
+      {
+        "type": "link_list",
+        "id": "menu",
+        "label": "Navigation Menu"
+      }
+    ]
   }
 ]

@@ -3,9 +3,45 @@
     {% for block in section.blocks %}
       <div class="footer__block footer__block--{{ block.type }}">
         {% case block.type %}
-          {% when 'logo' %}
-            <div class="footer__logo-copy">
-              {{ block.settings.logo_copy }}
+          {% when 'logo_column' %}
+            <div class="footer-column footer-logo-block">
+              {% if settings.logo_image %}
+                <div class="footer-logo-wrapper">
+                  <img
+                    src="{{ settings.logo_image | image_url: width: 300 }}"
+                    alt="{{ shop.name }}"
+                    class="footer-logo"
+                    loading="lazy"
+                  >
+                </div>
+              {% endif %}
+
+              <div class="footer-logo-text">
+                {{ block.settings.text_below_logo }}
+              </div>
+
+              <div class="footer-social-icons">
+                {% if block.settings.facebook_url != blank %}
+                  <a href="{{ block.settings.facebook_url }}" target="_blank" rel="noopener" aria-label="Facebook">
+                    {% render 'icon-facebook' %}
+                  </a>
+                {% endif %}
+                {% if block.settings.vimeo_url != blank %}
+                  <a href="{{ block.settings.vimeo_url }}" target="_blank" rel="noopener" aria-label="Vimeo">
+                    {% render 'icon-vimeo' %}
+                  </a>
+                {% endif %}
+                {% if block.settings.instagram_url != blank %}
+                  <a href="{{ block.settings.instagram_url }}" target="_blank" rel="noopener" aria-label="Instagram">
+                    {% render 'icon-instagram' %}
+                  </a>
+                {% endif %}
+                {% if block.settings.twitter_url != blank %}
+                  <a href="{{ block.settings.twitter_url }}" target="_blank" rel="noopener" aria-label="Twitter">
+                    {% render 'icon-twitter' %}
+                  </a>
+                {% endif %}
+              </div>
             </div>
           {% when 'information_column' %}
             <div class="footer-column">
@@ -77,14 +113,35 @@
   "max_blocks": 4,
   "blocks": [
     {
-      "type": "logo",
-      "name": "Logo Block",
+      "type": "logo_column",
+      "name": "Logo Column",
       "limit": 1,
       "settings": [
         {
           "type": "richtext",
-          "id": "logo_copy",
-          "label": "Text under logo"
+          "id": "text_below_logo",
+          "label": "Text below logo",
+          "default": "<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>"
+        },
+        {
+          "type": "url",
+          "id": "facebook_url",
+          "label": "Facebook URL"
+        },
+        {
+          "type": "url",
+          "id": "vimeo_url",
+          "label": "Vimeo URL"
+        },
+        {
+          "type": "url",
+          "id": "instagram_url",
+          "label": "Instagram URL"
+        },
+        {
+          "type": "url",
+          "id": "twitter_url",
+          "label": "Twitter URL"
         }
       ]
     },

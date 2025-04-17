@@ -1,19 +1,19 @@
 {% liquid
-  if section.settings.menu.links == blank
+  if settings.menu.links == blank
     assign main_menu_linklist = linklists[section.settings.menu].links
   else
-    assign main_menu_linklist = section.settings.menu.links
+    assign main_menu_linklist = settings.menu.links
   endif
 %}
 
 <header class="site-header">
   <div class="page-width header__inner">
     <a href="/" class="header__logo">
-      {% if section.settings.logo_mobile %}
-        <img src="{{ section.settings.logo_mobile | image_url }}" alt="Mobile Logo" class="logo--mobile">
+      {% if settings.logo_mobile %}
+        <img src="{{ settings.logo_mobile | image_url }}" alt="Mobile Logo" class="logo--mobile">
       {% endif %}
-      {% if section.settings.logo %}
-        <img src="{{ section.settings.logo | image_url }}" alt="Logo" class="logo--desktop">
+      {% if settings.logo_image %}
+        <img src="{{ settings.logo_image | image_url }}" alt="Logo" class="logo--desktop">
       {% endif %}
     </a>
 
@@ -56,26 +56,3 @@
     </div>
   </div>
 </header>
-
-{% schema %}
-{
-  "name": "Header",
-  "settings": [
-    {
-      "type": "image_picker",
-      "id": "logo",
-      "label": "Logo (Desktop)"
-    },
-    {
-      "type": "image_picker",
-      "id": "logo_mobile",
-      "label": "Logo (Mobile)"
-    },
-    {
-      "type": "link_list",
-      "id": "menu",
-      "label": "Navigation Menu"
-    }
-  ]
-}
-{% endschema %}
