@@ -7,15 +7,34 @@
             <div class="footer__logo-copy">
               {{ block.settings.logo_copy }}
             </div>
-          {% when 'navigation' %}
-            <div class="footer__nav-block">
-              <h4>{{ block.settings.nav_title }}</h4>
-              <ul class="footer__nav-list">
-                {% for link in linklists[block.settings.nav_menu].links %}
+          {% when 'information_column' %}
+            <div class="footer-column">
+              <h3 class="footer-title">{{ block.settings.title | upcase }}</h3>
+              <ul class="footer-links">
+                {% if block.settings.link_label_1 != blank and block.settings.link_url_1 != blank %}
                   <li>
-                    <a href="{{ link.url }}">{{ link.title }}</a>
+                    <a href="{{ block.settings.link_url_1 }}">{{ block.settings.link_label_1 }}</a>
                   </li>
-                {% endfor %}
+                {% endif %}
+                {% if block.settings.link_label_2 != blank and block.settings.link_url_2 != blank %}
+                  <li>
+                    <a href="{{ block.settings.link_url_2 }}">{{ block.settings.link_label_2 }}</a>
+                  </li>
+                {% endif %}
+                {% if block.settings.link_label_3 != blank and block.settings.link_url_3 != blank %}
+                  <li>
+                    <a href="{{ block.settings.link_url_3 }}">{{ block.settings.link_label_3 }}</a>
+                  </li>
+                {% endif %}
+              </ul>
+            </div>
+          {% when 'quick_links_column' %}
+            <div class="footer-column">
+              <h3 class="footer-title">{{ block.settings.title | upcase }}</h3>
+              <ul class="footer-links">
+                <li><a href="{{ block.settings.wishlist_url }}">Wishlist</a></li>
+                <li><a href="{{ routes.checkout_url }}">Checkout</a></li>
+                <li><a href="{{ routes.cart_url }}">Cart</a></li>
               </ul>
             </div>
           {% when 'contact' %}
@@ -55,7 +74,7 @@
 {% schema %}
 {
   "name": "Footer",
-  "max_blocks": 5,
+  "max_blocks": 4,
   "blocks": [
     {
       "type": "logo",
@@ -70,19 +89,66 @@
       ]
     },
     {
-      "type": "navigation",
-      "name": "Navigation Block",
+      "type": "information_column",
+      "name": "Information Column",
       "limit": 1,
       "settings": [
         {
           "type": "text",
-          "id": "nav_title",
-          "label": "Navigation Title"
+          "id": "title",
+          "label": "Section title",
+          "default": "Information"
         },
         {
-          "type": "link_list",
-          "id": "nav_menu",
-          "label": "Navigation Menu"
+          "type": "text",
+          "id": "link_label_1",
+          "label": "Link 1 label",
+          "default": "About Miralou"
+        },
+        {
+          "type": "url",
+          "id": "link_url_1",
+          "label": "Link 1 URL"
+        },
+        {
+          "type": "text",
+          "id": "link_label_2",
+          "label": "Link 2 label",
+          "default": "FAQ"
+        },
+        {
+          "type": "url",
+          "id": "link_url_2",
+          "label": "Link 2 URL"
+        },
+        {
+          "type": "text",
+          "id": "link_label_3",
+          "label": "Link 3 label",
+          "default": "Contact Us"
+        },
+        {
+          "type": "url",
+          "id": "link_url_3",
+          "label": "Link 3 URL"
+        }
+      ]
+    },
+    {
+      "type": "quick_links_column",
+      "name": "Quick Links Column",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Section title",
+          "default": "Quick Links"
+        },
+        {
+          "type": "url",
+          "id": "wishlist_url",
+          "label": "Wishlist URL"
         }
       ]
     },
