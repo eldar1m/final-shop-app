@@ -1,25 +1,21 @@
-<div class="w-full py-6 px-3">
-  <div class="border bg-white shadow-lg rounded-lg overflow-hidden">
-    <a href="{{ product_product.url }}">
-      {% if product_product.featured_image %}
-        <div class="h-80 overflow-hidden">
-          <img
-            class="w-full h-full object-cover transition duration-1000 ease-in-out hover:scale-105 transform"
-            src="{{ product_product.featured_image | img_url: 'medium' }}"
-            alt="{{ product_product.featured_image.alt }}"
-          >
-        </div>
+<div class="product-card">
+  <div class="product-card__image-wrapper">
+    {% if product %}
+      <img src="{{ product.featured_image | img_url: 'master' }}" alt="{{ product.title }}">
+    {% else %}
+      <div class="product-placeholder"></div>
+    {% endif %}
+  </div>
+  <div class="product-card__info">
+    <div class="product-vendor">{{ product.vendor | default: 'Vendor' }}</div>
+    <div class="product-title">{{ product.title | default: 'Product Title' }}</div>
+    <div class="product-price">
+      {% if product.price %}
+        {{ product.price | money_without_trailing_zeros }}
       {% else %}
-        {{ 'product-1' | placeholder_svg_tag: 'w-full h-full object-cover bg-gray-100' }}
+        $0.00
       {% endif %}
-    </a>
-
-    <div class="flex flex-col p-4">
-      <span class="text-sm text-gray-400">{{ product_product.vendor }}</span>
-
-      <a href="{{ product_product.url }}" class="text-gray-700 uppercase font-medium">{{ product_product.title }}</a>
-
-      <p class="text-gray-500">{{ product_product.price | money }}</p>
     </div>
+    <a href="{{ product.url | default: '#' }}" class="product-button">View product</a>
   </div>
 </div>
