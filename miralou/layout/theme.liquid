@@ -10,6 +10,9 @@
     {{ content_for_header }}
     <!-- Header hook for plugins -->
 
+    <style>
+      {% render 'css-vars' %}
+    </style>
     <link rel="stylesheet" href="{{ 'global.css' | asset_url }}">
   </head>
   <body>
