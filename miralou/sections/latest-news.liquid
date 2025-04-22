@@ -1,0 +1,108 @@
+<section class="latest-news">
+  <div class="latest-news__header">
+    <h2>LATEST NEWS</h2>
+    <p>
+      Nunc rhoncus auctor risus tempor lacus urna, id laoreet sed. Euismod nisl pellentesque risus cursus fringilla
+      tincidunt volutpat, non.
+    </p>
+  </div>
+
+  <div class="swiper latest-news-swiper">
+    <div class="swiper-grid">
+      {% for article in blogs.news.articles reversed limit: 6 %}
+        <div class="swiper-slide">
+          <div class="latest-news__card">
+            <div class="latest-news__image">
+              <a href="{{ article.url }}" class="latest-news__unit">
+                <img src="{{ article.image | img_url: '600x' }}" alt="{{ article.title }}">
+              </a>
+            </div>
+            <div class="latest-news__meta">
+              <p class="latest-news__date">{{ article.published_at | date: '%b %d, %Y' }}</p>
+              <h3 class="latest-news__title">{{ article.title }}</h3>
+              <a href="{{ article.url }}" class="latest-news__read">Read More →</a>
+            </div>
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+    <div class="swiper-pagination"></div>
+  </div>
+  <div class="carousel-section">
+    <div class="carousel">
+      <div class="carousel-overlay">
+        <div class="social">
+          <span class="social-name">@{{ shop.name }}</span>
+          <span class="social-icon">{% render 'icon-instagram' %}</span>
+        </div>
+      </div>
+      {% for block in section.blocks %}
+        <img
+          src="{{ block.settings.image | image_url: 'medium' }}"
+          alt="{{ block.settings.image.alt }}"
+          class="carousel-image"
+        >
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<script>
+  var latestNewsSwiper = new Swiper('.latest-news-swiper', {
+    loop: false,
+    slidesPerView: 3,
+    spaceBetween: 30,
+    pagination: {
+      el: '.swiper-pagination',
+      clickable: true,
+    },
+    breakpoints: {
+      768: {
+        slidesPerView: 2,
+      },
+      480: {
+        slidesPerView: 1,
+      },
+    },
+  });
+</script>
+
+{% schema %}
+{
+  "name": "Latest News",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Latest News"
+    },
+    {
+      "type": "textarea",
+      "id": "subheading",
+      "label": "Subheading",
+      "default": "Nunc rhoncus auctor risus tempor lacus urna, id laoreet sed. Euismod nisl pellentesque risus cursus fringilla tincidunt volutpat, non."
+    }
+  ],
+  "blocks": [
+    {
+      "type": "Image",
+      "name": "Image",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image"
+        }
+      ]
+    }
+  ],
+  "max_blocks": 14,
+  "presets": [
+    {
+      "name": "Latest News",
+      "category": "Custom"
+    }
+  ]
+}
+{% endschema %}

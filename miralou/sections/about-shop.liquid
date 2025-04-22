@@ -1,0 +1,128 @@
+<section class="about-reviews-section">
+  <div class="about-background-clip"></div>
+  <div class="about-container">
+    <div class="about-image">
+      <img src="{{ settings.about_image | image_url }}" alt="About Image">
+    </div>
+    <div class="about-text">
+      <h2>{{ section.settings.about_title }}</h2>
+      <p>{{ section.settings.about_text }}</p>
+    </div>
+  </div>
+
+  <div class="reviews-container">
+    <h2>{{ section.settings.reviews_title }}</h2>
+    <div class="swiper reviews-swiper">
+      <div class="swiper-grid">
+        {% for block in section.blocks %}
+          <div class="swiper-slide">
+            <blockquote>
+              <p>{{ block.settings.review_text }}</p>
+              <cite>{{ block.settings.review_author }}</cite>
+            </blockquote>
+          </div>
+        {% endfor %}
+      </div>
+      <div class="swiper-button-prev"></div>
+      <div class="swiper-button-next"></div>
+      <div class="swiper-pagination"></div>
+    </div>
+  </div>
+
+  <div class="brands-container">
+    {% for i in (1..4) %}
+      {% assign logo_key = 'brand_logo_' | append: i %}
+      {% assign logo = section.settings[logo_key] %}
+
+      {% if logo != blank %}
+        <img class="brand-logo-image" src="{{ logo | image_url }}" alt="Brand Logo {{ i }}">
+      {% endif %}
+    {% endfor %}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "About & Reviews",
+  "settings": [
+    {
+      "type": "text",
+      "id": "about_title",
+      "label": "About section title",
+      "default": "About Miralou"
+    },
+    {
+      "type": "textarea",
+      "id": "about_text",
+      "label": "About section text",
+      "default": "Ut donec suscipit nunc volutpat faucibus..."
+    },
+    {
+      "type": "text",
+      "id": "reviews_title",
+      "label": "Reviews section title",
+      "default": "What People Say About Us"
+    },
+    {
+      "type": "image_picker",
+      "id": "brand_logo_1",
+      "label": "Brand Logo 1"
+    },
+    {
+      "type": "image_picker",
+      "id": "brand_logo_2",
+      "label": "Brand Logo 2"
+    },
+    {
+      "type": "image_picker",
+      "id": "brand_logo_3",
+      "label": "Brand Logo 3"
+    },
+    {
+      "type": "image_picker",
+      "id": "brand_logo_4",
+      "label": "Brand Logo 4"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "review",
+      "name": "Review",
+      "settings": [
+        {
+          "type": "textarea",
+          "id": "review_text",
+          "label": "Review Text"
+        },
+        {
+          "type": "text",
+          "id": "review_author",
+          "label": "Author Name"
+        }
+      ]
+    }
+  ],
+  "max_blocks": 4,
+  "presets": [
+    {
+      "name": "About & Reviews Section",
+      "category": "Custom"
+    }
+  ]
+}
+{% endschema %}
+
+<script>
+  var swiper = new Swiper('.reviews-swiper', {
+    loop: true,
+    navigation: {
+      nextEl: '.swiper-button-next',
+      prevEl: '.swiper-button-prev',
+    },
+
+    pagination: {
+      el: '.swiper-pagination',
+      clickable: true,
+    },
+  });
+</script>

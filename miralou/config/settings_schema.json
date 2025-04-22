@@ -11,6 +11,11 @@
         "type": "image_picker",
         "id": "logo_image_mobile",
         "label": "Mobile logo image"
+      },
+      {
+        "type": "image_picker",
+        "id": "about_image",
+        "label": "About image"
       }
     ]
   },
