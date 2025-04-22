@@ -1,15 +1,17 @@
 <section class="products-section">
-  <h2 class="products-section__title">{{ section.settings.heading }}</h2>
+  <div class="products-container">
+    <h2 class="products-section__title">{{ section.settings.heading }}</h2>
 
-  <div class="products-wrapper">
-    {% assign total_to_show = section.settings.initial_count | plus: 0 %}
-    <div class="products-grid">
-      {% assign sorted_products = section.settings.featured_products.products | sort: 'price' %}
-      {% for product in sorted_products limit: section.settings.number_of_products_displayed %}
-        {% render 'product-card', product: product %}
-      {% endfor %}
+    <div class="products-wrapper">
+      {% assign total_to_show = section.settings.initial_count | plus: 0 %}
+      <div class="products-grid">
+        {% assign sorted_products = section.settings.featured_products.products | sort: 'price' %}
+        {% for product in sorted_products limit: section.settings.number_of_products_displayed %}
+          {% render 'product-card', product: product %}
+        {% endfor %}
+      </div>
+      <button id="showMoreBtn" class="show-more-button">Show More</button>
     </div>
-    <button id="showMoreBtn" class="show-more-button">Show More</button>
   </div>
 </section>
 
@@ -30,6 +32,7 @@
 {% schema %}
 {
   "name": "Products Section",
+  "limit": 1,
   "settings": [
     {
       "type": "text",

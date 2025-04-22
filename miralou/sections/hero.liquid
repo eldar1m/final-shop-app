@@ -3,18 +3,22 @@
   style="background-image: url({{ section.settings.background_image | img_url: 'master' }});"
 >
   <div class="hero-overlay">
-    <div class="hero-content">
-      <h2 class="hero-title">{{ section.settings.heading }}</h2>
-      <p class="hero-subtext">{{ section.settings.subtext }}</p>
-      {% if section.settings.button_link != blank %}
-        <a href="{{ section.settings.button_link }}" class="hero-button">
-          {{ section.settings.button_label }}
-        </a>
-      {% endif %}
+    <div class="hero-container">
+      <div class="hero-content">
+        <h2 class="hero-title">{{ section.settings.heading }}</h2>
+        <p class="hero-subtext">{{ section.settings.subtext }}</p>
+        {% if section.settings.button_link != blank %}
+          <a href="{{ section.settings.button_link }}" class="hero-button">
+            {{ section.settings.button_label }}
+          </a>
+        {% endif %}
+      </div>
+      <div class="hero-shoes-container">
+        {% if section.settings.shoe_image %}
+          <img src="{{ section.settings.shoe_image | img_url: 'master' }}" alt="Shoe" class="hero-shoes">
+        {% endif %}
+      </div>
     </div>
-    {% if section.settings.shoe_image %}
-      <img src="{{ section.settings.shoe_image | img_url: 'master' }}" alt="Shoe" class="hero-shoe">
-    {% endif %}
   </div>
 </section>
 {% schema %}

@@ -37,11 +37,12 @@
         </div>
       </div>
       {% for block in section.blocks %}
-        <img
-          src="{{ block.settings.image | image_url: 'medium' }}"
-          alt="{{ block.settings.image.alt }}"
-          class="carousel-image"
-        >
+        <div class="carousel-image">
+          <img
+            src="{{ block.settings.image | img_url: 'master' }}"
+            alt="{{ block.settings.image.alt }}"
+          >
+        </div>
       {% endfor %}
     </div>
   </div>
@@ -70,6 +71,7 @@
 {% schema %}
 {
   "name": "Latest News",
+  "limit": 1,
   "settings": [
     {
       "type": "text",
