@@ -9,7 +9,10 @@
  */
 {
   "current": {
+    "logo_image": "shopify://shop_images/miralou_logo-removebg-preview.png",
+    "logo_image_mobile": "shopify://shop_images/miralou_mobile_logo.png",
     "about_image": "shopify://shop_images/about-image.jpg",
+    "menu": "main-menu",
     "logo_width": 90,
     "color_schemes": {
       "scheme-1": {
