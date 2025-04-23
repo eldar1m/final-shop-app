@@ -87,22 +87,16 @@
     "latest_news_3mkUzM": {
       "type": "latest-news",
       "blocks": {
+        "image_NEkh4q": {
+          "type": "Image",
+          "settings": {
+            "image": "shopify://shop_images/ab028637ea019f71467a19be45b1798e.jpg"
+          }
+        },
         "image_fmAWxP": {
           "type": "Image",
           "settings": {
             "image": "shopify://shop_images/004abf25521e1209b509e613e2c6a512.jpg"
-          }
-        },
-        "image_86w3Hx": {
-          "type": "Image",
-          "settings": {
-            "image": "shopify://shop_images/66514808f114e0bace5f4c955fc40908.jpg"
-          }
-        },
-        "image_DwYfGR": {
-          "type": "Image",
-          "settings": {
-            "image": "shopify://shop_images/e295a1012545ddf625713cc77af1f8fc.jpg"
           }
         },
         "image_bN7amB": {
@@ -111,16 +105,16 @@
             "image": "shopify://shop_images/d570293be012667ef3b7d5dc85e7b968.jpg"
           }
         },
-        "image_dbbebt": {
-          "type": "Image",
-          "settings": {
-            "image": "shopify://shop_images/35590978081a1681b80e70621877e676.jpg"
-          }
-        },
         "image_wYiqHr": {
           "type": "Image",
           "settings": {
             "image": "shopify://shop_images/6b63eede2231ae8fc691a1e943dc7028.jpg"
+          }
+        },
+        "image_86w3Hx": {
+          "type": "Image",
+          "settings": {
+            "image": "shopify://shop_images/66514808f114e0bace5f4c955fc40908.jpg"
           }
         },
         "image_abCXgP": {
@@ -129,28 +123,34 @@
             "image": "shopify://shop_images/9eab5a3adf8ec88abbac1250247b6d9f.jpg"
           }
         },
-        "image_8hUEM3": {
-          "type": "Image",
-          "settings": {
-            "image": "shopify://shop_images/ea109ebb31df50ee658514758cd1c1ea.jpg"
-          }
-        },
-        "image_meMNiY": {
-          "type": "Image",
-          "settings": {
-            "image": "shopify://shop_images/a36d471939fe6bea6dde326c1ae599fe.jpg"
-          }
-        },
         "image_HH8FmQ": {
           "type": "Image",
           "settings": {
             "image": "shopify://shop_images/9e66007c47ba8873604062701abfa83b.jpg"
           }
         },
-        "image_NEkh4q": {
+        "image_kHKi94": {
           "type": "Image",
           "settings": {
-            "image": "shopify://shop_images/ab028637ea019f71467a19be45b1798e.jpg"
+            "image": "shopify://shop_images/c507f26ad894b9bdbd24b7483d237ec7.jpg"
+          }
+        },
+        "image_8hUEM3": {
+          "type": "Image",
+          "settings": {
+            "image": "shopify://shop_images/ea109ebb31df50ee658514758cd1c1ea.jpg"
+          }
+        },
+        "image_dbbebt": {
+          "type": "Image",
+          "settings": {
+            "image": "shopify://shop_images/35590978081a1681b80e70621877e676.jpg"
+          }
+        },
+        "image_DwYfGR": {
+          "type": "Image",
+          "settings": {
+            "image": "shopify://shop_images/e295a1012545ddf625713cc77af1f8fc.jpg"
           }
         },
         "image_KC4QMb": {
@@ -165,28 +165,28 @@
             "image": "shopify://shop_images/9abd73f7d7234b83ba7639b5774b3a9a.jpg"
           }
         },
-        "image_kHKi94": {
+        "image_meMNiY": {
           "type": "Image",
           "settings": {
-            "image": "shopify://shop_images/c507f26ad894b9bdbd24b7483d237ec7.jpg"
+            "image": "shopify://shop_images/a36d471939fe6bea6dde326c1ae599fe.jpg"
           }
         }
       },
       "block_order": [
-        "image_fmAWxP",
-        "image_86w3Hx",
-        "image_DwYfGR",
-        "image_bN7amB",
-        "image_dbbebt",
-        "image_wYiqHr",
-        "image_abCXgP",
-        "image_8hUEM3",
-        "image_meMNiY",
-        "image_HH8FmQ",
         "image_NEkh4q",
+        "image_fmAWxP",
+        "image_bN7amB",
+        "image_wYiqHr",
+        "image_86w3Hx",
+        "image_abCXgP",
+        "image_HH8FmQ",
+        "image_kHKi94",
+        "image_8hUEM3",
+        "image_dbbebt",
+        "image_DwYfGR",
         "image_KC4QMb",
         "image_Pjp8Ae",
-        "image_kHKi94"
+        "image_meMNiY"
       ],
       "settings": {
         "heading": "Latest News",
