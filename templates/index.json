@@ -1,4 +1,80 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
-  "sections": {},
-  "order": []
+  "sections": {
+    "hero_NA9yyt": {
+      "type": "hero",
+      "settings": {
+        "heading": "Choose your shoes with us.",
+        "subtext": "We will help you to choose the product that without the doubt suits you best. And we mean it",
+        "button_label": "Read More",
+        "button_link": ""
+      }
+    },
+    "categories_phCEyB": {
+      "type": "categories",
+      "blocks": {
+        "collection_block_tLD7U3": {
+          "type": "collection_block",
+          "settings": {
+            "collection": "woman"
+          }
+        },
+        "collection_block_dXJffV": {
+          "type": "collection_block",
+          "settings": {
+            "collection": "men"
+          }
+        },
+        "collection_block_taG4UC": {
+          "type": "collection_block",
+          "settings": {
+            "collection": "kids"
+          }
+        }
+      },
+      "block_order": [
+        "collection_block_tLD7U3",
+        "collection_block_dXJffV",
+        "collection_block_taG4UC"
+      ],
+      "settings": {
+        "heading": "Shop by Categories",
+        "subtext": "Pick a category you need"
+      }
+    },
+    "products_zGbekh": {
+      "type": "products",
+      "settings": {
+        "heading": "Our Products",
+        "featured_products": "all",
+        "number_of_products_displayed": 8
+      }
+    },
+    "about_shop_xE6bhh": {
+      "type": "about-shop",
+      "settings": {
+        "about_title": "About Miralou",
+        "about_text": "Ut donec suscipit nunc volutpat faucibus...",
+        "reviews_title": "What People Say About Us",
+        "brand_logo_1": "shopify://shop_images/adidas-logo.png",
+        "brand_logo_2": "shopify://shop_images/nike-logo.png",
+        "brand_logo_3": "shopify://shop_images/jordan-logo.png",
+        "brand_logo_4": "shopify://shop_images/converse-logo.png"
+      }
+    }
+  },
+  "order": [
+    "hero_NA9yyt",
+    "categories_phCEyB",
+    "products_zGbekh",
+    "about_shop_xE6bhh"
+  ]
 }
