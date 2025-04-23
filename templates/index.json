@@ -15,7 +15,9 @@
         "heading": "Choose your shoes with us.",
         "subtext": "We will help you to choose the product that without the doubt suits you best. And we mean it",
         "button_label": "Read More",
-        "button_link": ""
+        "button_link": "",
+        "shoe_image": "shopify://shop_images/white-nikes.png",
+        "background_image": "shopify://shop_images/hero-background.jpg"
       }
     },
     "categories_phCEyB": {
