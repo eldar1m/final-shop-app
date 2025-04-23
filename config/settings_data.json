@@ -9,6 +9,7 @@
  */
 {
   "current": {
+    "about_image": "shopify://shop_images/about-image.jpg",
     "logo_width": 90,
     "color_schemes": {
       "scheme-1": {
