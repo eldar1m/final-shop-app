@@ -60,6 +60,18 @@
     },
     "about_shop_xE6bhh": {
       "type": "about-shop",
+      "blocks": {
+        "review_7Wcz7j": {
+          "type": "review",
+          "settings": {
+            "review_text": "“Eu dolor at venenatis aliquam velit et in consequat. Nam dui pulvinar consequat eleifend malesuada. Eu dolor at venenatis aliquam velit et in consequat. Nam dui pulvinar consequat eleifend malesuada. Eu dolor at venenatis aliquam velit et in consequat. Nam dui pulvinar consequat eleifend malesuada.”",
+            "review_author": ""
+          }
+        }
+      },
+      "block_order": [
+        "review_7Wcz7j"
+      ],
       "settings": {
         "about_title": "About Miralou",
         "about_text": "Ut donec suscipit nunc volutpat faucibus...",
