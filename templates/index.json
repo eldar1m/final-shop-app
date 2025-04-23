@@ -81,12 +81,30 @@
         "brand_logo_3": "shopify://shop_images/jordan-logo.png",
         "brand_logo_4": "shopify://shop_images/converse-logo.png"
       }
+    },
+    "latest_news_3mkUzM": {
+      "type": "latest-news",
+      "settings": {
+        "heading": "Latest News",
+        "subheading": "Nunc rhoncus auctor risus tempor lacus urna, id laoreet sed. Euismod nisl pellentesque risus cursus fringilla tincidunt volutpat, non."
+      }
+    },
+    "newsletter_CQWdxN": {
+      "type": "newsletter",
+      "settings": {
+        "heading": "OUR NEWSSELLER",
+        "subtext": "<p>Subscribe to get more useful information about us and to get you <strong>15% discount</strong> off your next purchase</p>",
+        "placeholder": "Enter your e-mail",
+        "button_label": "Subscribe"
+      }
     }
   },
   "order": [
     "hero_NA9yyt",
     "categories_phCEyB",
     "products_zGbekh",
-    "about_shop_xE6bhh"
+    "about_shop_xE6bhh",
+    "latest_news_3mkUzM",
+    "newsletter_CQWdxN"
   ]
 }
