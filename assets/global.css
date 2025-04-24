@@ -53,7 +53,7 @@ body {
 }
 
 .header__logo img {
-  height: 42px;
+  height: 32px;
 }
 
 .nav-desktop {
@@ -65,7 +65,7 @@ body {
 /* Menu buttons */
 .menu-item-wrapper {
   position: relative;
-  margin: 0 2rem;
+  margin: 0 1rem;
 }
 
 .menu-item {
@@ -77,11 +77,8 @@ body {
   text-transform: uppercase;
   color: #000;
   text-decoration: none;
-  padding: 0.5rem 1rem;
   background: transparent;
   border: none;
-  border-radius: 6px;
-  gap: 6px;
   cursor: pointer;
   transition: color 0.2s ease;
 }
@@ -94,7 +91,8 @@ body {
   width: 17px;
   height: 17px;
   stroke: #000;
-  stroke-width: 0.02
+  stroke-width: 0.02;
+  margin-left: 5px;
 }
 
 /* Dropdown menu */
@@ -136,7 +134,7 @@ body {
 .header__icons {
   display: flex;
   align-items: center;
-  gap: 2.5rem;
+  gap: 1.5rem;
 }
 
 .header__icons a {
@@ -165,7 +163,7 @@ body {
 
 .hero-overlay {
   max-height: inherit;
-  background-color: rgba(0, 0, 0, 0.6);
+  background-color: rgba(0, 0, 0, 0.75);
   position: absolute;
   top: 0;
   left: 0;
@@ -183,7 +181,6 @@ body {
 
 .hero-content {
   display: flex;
-  justify-content: center;
   flex-wrap: wrap;
   align-content: center;
   width: 370px;
@@ -195,11 +192,15 @@ body {
   font-family: 'Barlow', sans-serif;
   line-height: 100%;
   text-transform: uppercase;
+  margin: 25px 0 0 5px;
 }
 
 .hero-subtext {
-  line-height: 1.7;
   color: #e0e0e0;
+  font-family: 'Poppins', sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  width: 290px;
 
 }
 
@@ -227,6 +228,7 @@ body {
   width: 100%;
   height: 100%;
   object-fit: cover;
+  margin-left: 2rem;
 }
 
 .category-section {
@@ -768,17 +770,17 @@ blockquote cite {
   margin: 0.30rem 0;
 }
 
-.footer__bottom {
-  border-top: 1px solid #ddd;
-  padding-top: 1rem;
-}
 
 .footer__bottom-inner {
   display: flex;
   justify-content: space-between;
-  font-size: 1.2rem !important;
-  color: #999;
+  font-size: 16px;
+  font-family: 'Jost', sans-serif;
+  font-weight: 700;
+  color: #FFF;
   text-transform: uppercase;
+  width: 1170px;
+  margin: 0 auto;
 }
 
 /* CUSTOM DARK FOOTER STYLES */
@@ -837,16 +839,7 @@ blockquote cite {
 /* Footer bottom */
 .footer__bottom {
   border-top: 1px solid #e53935;
-  padding-top: 1.5rem;
-}
-
-.footer__bottom-inner {
-  display: flex;
-  justify-content: space-between;
-  font-size: 14px;
-  color: #fff;
-  text-transform: uppercase;
-  font-weight: 600;
+  padding: 1rem 0;
 }
 
 .footer-contact-block {
@@ -877,7 +870,9 @@ blockquote cite {
 
 .footer-title {
   color: #ff0000;
-  font-weight: bold;
+  font-family: 'Barlow', sans-serif;
+  font-size: 14px;
+  font-weight: 700;
   text-transform: uppercase;
   margin-top: 0;
   margin-bottom: 3rem;
@@ -887,12 +882,15 @@ blockquote cite {
   list-style: none;
   padding: 0;
   margin: 0;
+
 }
 
 .footer-item {
   display: flex;
   align-items: flex-start;
-  font-size: 16px;
+  font-family: 'Poppins', sans-serif;
+  font-weight: 400;
+  font-size: 14px;
   margin-bottom: 2rem;
 }
 
@@ -933,32 +931,34 @@ blockquote cite {
 
 .footer-logo-wrapper img {
   filter: brightness(0) invert(1);
-  width: 8rem;
+  width: 106px;
 }
 
 .footer-logo-text p {
-  width: 15rem;
+  width: 10rem;
+  font-size: 12px;
+  font-weight: 400;
+  font-family: 'Poppins', sans-serif;
 }
 
 .footer-social-icons {
   margin: 3rem 0 0 -0.5rem;
-
-
+  width: 137px;
+  height: 24px;
 }
 
 .footer-social-icons a {
   color: transparent;
-  margin-right: 0.8rem;
+  margin: 0 3px;
 }
 
 .footer-social-icons a svg {
   fill: currentColor;
   color: #ffffff;
-  width: 2rem;
-  height: 2rem;
+  width: 24px;
+  height: 24px;
   transition: opacity 0.3s ease;
   display: inline-flex;
-  margin-right: 0.7 rem;
 }
 
 /* Newsletter Section */
