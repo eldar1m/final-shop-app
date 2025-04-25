@@ -20,7 +20,10 @@
             <div class="latest-news__meta">
               <p class="latest-news__date">{{ article.published_at | date: '%b %d, %Y' }}</p>
               <h3 class="latest-news__title">{{ article.title }}</h3>
-              <a href="{{ article.url }}" class="latest-news__read">Read More →</a>
+              <a href="{{ article.url }}" class="latest-news__read"
+                >Read More
+                <span class="icon-arrow-right">{% render 'icon-arrow-right' %}</span>
+              </a>
             </div>
           </div>
         </div>

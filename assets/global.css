@@ -632,11 +632,19 @@ blockquote cite {
 }
 
 .latest-news__read {
-  font-size: 14px;
+  font-size: 12px;
+  font-family: 'Poppins', sans-serif;
+  font-weight: 400;
   color: #000;
   display: inline-block;
   text-decoration: none;
   transition: color 0.2s ease;
+}
+
+.latest-news__read svg {
+  width: 14px;
+  height: 9px;
+
 }
 
 .latest-news__unit:hover .latest-news__read {
@@ -644,7 +652,7 @@ blockquote cite {
 }
 
 .carousel-section {
-  padding-bottom: 20px;
+  padding: 100px 0;
 }
 
 .carousel {
@@ -964,12 +972,9 @@ blockquote cite {
 /* Newsletter Section */
 .newsletter {
   background-color: #1e1e1e;
-  padding: 2rem 27rem;
+  width: 100%;
   color: #ffffff;
-}
-
-.newsletter__text {
-  width: 18rem;
+  padding: 40px 0;
 }
 
 .newsletter__inner {
@@ -978,6 +983,8 @@ blockquote cite {
   align-items: center;
   justify-content: space-between;
   gap: 2rem;
+  width: 1070px;
+  margin: 0 auto;
 }
 
 .newsletter__title {
@@ -990,34 +997,42 @@ blockquote cite {
 }
 
 .newsletter__subtext {
-  max-width: 400px;
+  width: 250px;
+  height: 54px;
   color: #ddd;
-  font-family: 'Barlow';
+  font-family: 'Poppins', sans-serif;
+  font-weight: 400;
+  font-size: 12px;
 }
 
 .newsletter__form {
   display: flex;
   flex: 1;
-  max-width: 800px;
+  gap: 10px;
 }
 
 .newsletter__form input[type="email"] {
   flex-grow: 1;
-  padding: 0.75rem 1rem;
   border: 1px solid #e53935;
   border-radius: 6px;
   background: #1e1e1e;
-  color: #ffffff;
-  margin-right: 1rem;
+  width: 565px;
+  font-family: 'Poppins', sans-serif;
+  font-weight: 400;
+  font-size: 12px;
+  padding-left: 10px;
 }
 
 .newsletter__form button {
-  padding: 0.75rem 2rem;
+  width: 170px;
+  height: 31px;
   background-color: #e53935;
   color: #fff;
   border: none;
   border-radius: 6px;
   font-weight: 600;
+  font-size: 14px;
+  font-family: 'Poppins', sans-serif;
   text-transform: uppercase;
   cursor: pointer;
 }
