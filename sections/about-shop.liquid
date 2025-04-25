@@ -6,7 +6,7 @@
         <img src="{{ settings.about_image | image_url }}" alt="About Image">
       </div>
       <div class="about-text">
-        <h2>{{ section.settings.about_title }}</h2>
+        <h4>{{ section.settings.about_title }}</h4>
         <p>{{ section.settings.about_text }}</p>
       </div>
     </div>
@@ -18,7 +18,7 @@
           {% for block in section.blocks %}
             <div class="swiper-slide">
               <blockquote>
-                <p>{{ block.settings.review_text }}</p>
+                <p class="review-message">{{ block.settings.review_text }}</p>
                 <cite>{{ block.settings.review_author }}</cite>
               </blockquote>
             </div>
@@ -32,14 +32,18 @@
   </div>
 
   <div class="brands-container">
-    {% for i in (1..4) %}
-      {% assign logo_key = 'brand_logo_' | append: i %}
-      {% assign logo = section.settings[logo_key] %}
-
-      {% if logo != blank %}
-        <img class="brand-logo-image" src="{{ logo | image_url }}" alt="Brand Logo {{ i }}">
-      {% endif %}
-    {% endfor %}
+    <div class="brand-logo-image">
+      {% render 'icon-logo-nike' %}
+    </div>
+    <div class="brand-logo-image">
+      {% render 'icon-logo-adidas' %}
+    </div>
+    <div class="brand-logo-image">
+      {% render 'icon-logo-jordan' %}
+    </div>
+    <div class="brand-logo-image">
+      {% render 'icon-logo-converse' %}
+    </div>
   </div>
 </section>
 

@@ -492,9 +492,20 @@ body {
   min-width: 300px;
 }
 
-.about-text h2 {
-  color: #e63946;
+.about-text h4 {
+  color: #EF3636;
+  font-family: 'Barlow', sans-serif;
+  font-weight: 700;
+  font-size: 30px;
+  text-transform: uppercase;
   margin-bottom: 20px;
+}
+
+.about-text p {
+  font-family: 'Poppins', sans-serif;
+  font-weight: 400;
+  font-size: 16px;
+  color: #626262;
 }
 
 .reviews-container {
@@ -523,11 +534,16 @@ body {
 }
 
 blockquote {
-  font-style: italic;
   font-size: 16px;
   line-height: 1.6;
   margin: 0;
   text-align: center;
+}
+
+blockquote p {
+  font-family: 'Poppins', sans-serif;
+  font-weight: 400;
+  font-size: 16px;
 }
 
 blockquote cite {
@@ -540,28 +556,30 @@ blockquote cite {
 
 .brands-container {
   display: flex;
-  justify-content: center;
-  align-items: center;
+  margin: 0 auto;
+  max-width: 771px;
   gap: 40px;
-  margin: 60px auto;
-  max-width: 1000px;
-  flex-wrap: wrap;
 }
 
-.brands-container img {
-  height: 40px;
+
+.brand-logo-image {
+  height: 84px;
+  width: 170px;
+  display: flex;
+  align-items: center;
+}
+
+brand-logo-image svg {
+  height: 69px;
+  width: 128px;
+  vertical-align: middle;
   object-fit: contain;
   opacity: 0.5;
   transition: opacity 0.3s ease;
 }
 
-.brands-container img:hover {
+.brands-container svg:hover {
   opacity: 1;
-}
-
-.brand-logo-image {
-  height: 84px;
-  width: 170px;
 }
 
 .swiper-grid {
@@ -570,21 +588,31 @@ blockquote cite {
   justify-content: center;
 }
 
+.latest-news__header {
+  width: 1170px;
+  margin: 0 auto;
+}
+
 .latest-news {
-  text-align: center;
+  text-align: left;
+  margin-top: 80px;
 }
 
 .latest-news__header h2 {
-  font-size: 28px;
+  font-size: 30px;
   font-weight: 700;
+  font-family: 'Barlow', sans-serif;
   text-transform: uppercase;
   margin-bottom: 10px;
 }
 
 .latest-news__header p {
   color: #666;
-  font-size: 16px;
-  margin-bottom: 40px;
+  font-size: 15px;
+  font-weight: 400;
+  font-family: 'Poppins', sans-serif;
+  margin-bottom: 30px;
+  width: 570px;
 }
 
 
