@@ -1,0 +1,74 @@
+{% comment %}
+  Product page layout based on uploaded design
+{% endcomment %}
+
+<div class="product-page">
+  <div class="product-gallery">
+    {% for image in product.images %}
+      <div class="product-gallery-item">
+        <img src="{{ image.src | img_url: 'large' }}" alt="{{ image.alt | escape }}">
+      </div>
+    {% endfor %}
+  </div>
+
+  <div class="product-info">
+    <div class="product-breadcrumb">
+      {% for collection in product.collections %}
+        <span>{{ collection.title }}</span>
+      {% endfor %}
+      / {{ product.title }}
+    </div>
+
+    <div class="product-page-product-title">
+      {{ product.vendor }}
+      {{ product.title }}
+    </div>
+
+    <div class="product-page-product-price">
+      {{ product.price | money }}
+    </div>
+
+    <form method="post" action="/cart/add">
+      <div class="product-page-product-variants">
+        {% for variant in product.variants %}
+          <label class="variant-button {% if variant.available == false %}disabled{% endif %}">
+            <div class="size-options">
+              <label class="size-option">
+                <input
+                  type="radio"
+                  name="size"
+                  value="{{ variant.title }}"
+                  {% unless variant.available %}
+                    disabled
+                  {% endunless %}
+                >
+                <span>{{ variant.title }}</span>
+              </label>
+            </div>
+          </label>
+        {% endfor %}
+      </div>
+
+      <div class="product-actions">
+        <button
+          type="submit"
+          class="add-to-cart"
+          {% unless product.available %}
+            disabled
+          {% endunless %}
+        >
+          Add to cart
+        </button>
+        <button type="button" class="add-to-wishlist">Add to wishlist</button>
+      </div>
+    </form>
+
+    <div class="product-page-product-description">
+      <div>
+        {{ product.description }}
+      </div>
+    </div>
+  </div>
+</div>
+
+{% section 'products-section' %}
