@@ -1,0 +1,55 @@
+<div id="cart-drawer" class="cart-drawer">
+  <div class="cart-drawer-overlay"></div>
+
+  <div class="cart-drawer-content">
+    <h2>Your Cart</h2>
+
+    <div class="cart-items">
+      {% for item in cart.items %}
+        <div class="cart-item">
+          <img src="{{ item.image | img_url: 'small' }}" alt="{{ item.product.title }}">
+          <div>
+            <p>{{ item.product.title }}</p>
+            <p>Qty: {{ item.quantity }}</p>
+            <p>{{ item.final_line_price | money }}</p>
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+
+    <div class="cart-total">
+      <p>Total: {{ cart.total_price | money }}</p>
+      <a href="/checkout" class="checkout-button">Checkout</a>
+    </div>
+  </div>
+</div>
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    var cartDrawer = document.getElementById('cart-drawer');
+    var cartIcon = document.getElementById('cart-icon');
+    var overlay = document.querySelector('.cart-drawer-overlay');
+
+    // Open cart on cart icon click
+    cartIcon.addEventListener('click', function () {
+      cartDrawer.classList.add('active');
+      overlay.classList.add('active');
+    });
+
+    // Close cart when clicking overlay
+    overlay.addEventListener('click', function () {
+      cartDrawer.classList.remove('active');
+      overlay.classList.remove('active');
+    });
+
+    // Optional: Close cart if clicking outside cart content
+    document.addEventListener('click', function (event) {
+      if (cartDrawer.classList.contains('active')) {
+        // If click is outside the cart drawer content
+        if (!cartDrawer.contains(event.target) && !cartIcon.contains(event.target)) {
+          cartDrawer.classList.remove('active');
+          overlay.classList.remove('active');
+        }
+      }
+    });
+  });
+</script>
