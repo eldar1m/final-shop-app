@@ -2,7 +2,13 @@
   <div class="newsletter__inner page-width">
     <div class="newsletter__text">
       <h2 class="newsletter__title">{{ section.settings.heading }}</h2>
-      <div class="newsletter__subtext">{{ section.settings.subtext }}</div>
+      <div class="newsletter__subtext">
+        {{ section.settings.subscribe_text }}
+        <span class="newsletter__discount">
+          {{ section.settings.discount_text }}
+        </span>
+        {{ section.settings.subscribe_text_after }}
+      </div>
     </div>
     <form
       method="post"
@@ -31,10 +37,22 @@
       "default": "OUR NEWSSELLER"
     },
     {
-      "type": "richtext",
-      "id": "subtext",
-      "label": "Subtext",
-      "default": "<p>Subscribe to get more useful information about us and to get you <strong>15% discount</strong> off your next purchase</p>"
+      "type": "text",
+      "id": "subscribe_text",
+      "label": "Text before discount",
+      "default": "Subscribe to get more useful information about us and to get you"
+    },
+    {
+      "type": "text",
+      "id": "discount_text",
+      "label": "Discount text",
+      "default": "15%"
+    },
+    {
+      "type": "text",
+      "id": "subscribe_text_after",
+      "label": "Text after discount",
+      "default": "discount off your next purchase"
     },
     {
       "type": "text",

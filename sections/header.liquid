@@ -5,6 +5,7 @@
     assign main_menu_linklist = settings.menu.links
   endif
 %}
+{% assign current_page = request.path %}
 
 <header class="site-header">
   <div class="page-width header__inner">
@@ -18,15 +19,17 @@
     </a>
 
     <nav class="nav-desktop">
-      {% for link in main_menu_linklist %}
-        <div class="menu-item-wrapper">
+      <div class="menu-item-wrapper">
+        {% for link in main_menu_linklist %}
           {% if link.links != blank %}
             {% assign has_children = link.links | replace: '-', '_' %}
             {% if has_children %}
-              <button type="button" class="menu-item with-chevron">
+              <a
+                class="menu-item with-chevron {% if link.url == current_page %}menu-item-active{% endif %}"
+              >
                 {{ link.title }}
                 {% render 'icon-dropdown' %}
-              </button>
+              </a>
               <div class="dropdown-menu">
                 {% for childlink in link.links %}
                   <a href="{{ childlink.url }}" class="dropdown-link">{{ childlink.title }}</a>
@@ -39,8 +42,8 @@
           {% else %}
             <a href="{{ link.url }}" class="menu-item">{{ link.title }}</a>
           {% endif %}
-        </div>
-      {% endfor %}
+        {% endfor %}
+      </div>
     </nav>
 
     <div class="header__icons">

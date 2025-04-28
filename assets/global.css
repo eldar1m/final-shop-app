@@ -64,8 +64,10 @@ body {
 
 /* Menu buttons */
 .menu-item-wrapper {
-  position: relative;
-  margin: 0 1rem;
+  display: flex;
+  width: 475px;
+  margin: 0 auto;
+  justify-content: space-between;
 }
 
 .menu-item {
@@ -81,6 +83,7 @@ body {
   border: none;
   cursor: pointer;
   transition: color 0.2s ease;
+  position: relative;
 }
 
 .menu-item.active {
@@ -88,15 +91,14 @@ body {
 }
 
 .menu-item svg {
-  width: 17px;
-  height: 17px;
+  width: 10px;
+  height: 6px;
   stroke: #000;
-  stroke-width: 0.02;
   margin-left: 5px;
 }
 
 /* Dropdown menu */
-.menu-item-wrapper:hover .dropdown-menu {
+.menu-item:hover .dropdown-menu {
   display: block;
 }
 
@@ -134,22 +136,14 @@ body {
 .header__icons {
   display: flex;
   align-items: center;
-  gap: 1.5rem;
-}
-
-.header__icons a {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 32px;
-  height: 32px;
-  color: #000;
-  text-decoration: none;
+  justify-content: space-between;
+  width: 136px;
+  height: 24px;
 }
 
 .header__icons svg {
-  width: 22px;
-  height: 22px;
+  width: 24px;
+  height: 24px;
   stroke: #000;
 }
 
@@ -260,6 +254,9 @@ body {
   margin: 0 auto;
 }
 
+.category-section__header {
+  margin-top: 90px;
+}
 
 .category-section__title {
   color: #e53935;
@@ -330,6 +327,9 @@ body {
   font-size: 14px;
 }
 
+.products-section {
+  margin-top: 90px;
+}
 
 .products-container {
   max-width: 1170px;
@@ -557,11 +557,14 @@ body {
 }
 
 .reviews-swiper {
+  width: 970px;
+  height: 205px;
+  display: flex;
   background-color: #f7f7f7;
   height: 12rem;
   justify-content: center;
+  align-items: center;
   text-align: center;
-  padding: 1rem 5rem 0rem 5rem;
 }
 
 
@@ -578,12 +581,15 @@ blockquote {
   line-height: 1.6;
   margin: 0;
   text-align: center;
+  background-color: #F6F6F6;
 }
 
 blockquote p {
+  width: 770px;
   font-family: 'Poppins', sans-serif;
   font-weight: 400;
   font-size: 16px;
+  width: 770px;
 }
 
 blockquote cite {
@@ -683,20 +689,24 @@ brand-logo-image svg {
 
 .latest-news__meta {
   margin-top: 15px;
+  text-align: center;
 }
 
 .latest-news__date {
-  color: #888;
-  font-size: 14px;
+  color: #989898;
+  font-size: 12px;
+  font-weight: 400;
+  font-family: 'Poppins', sans-serif;
   margin-bottom: 6px;
 }
 
 .latest-news__title {
-  color: #e63946;
-  font-weight: 600;
-  font-size: 15px;
-  text-transform: uppercase;
+  color: #EF3636;
+  font-size: 14px;
+  font-weight: 700;
+  font-family: 'Barlow', sans-serif;
   margin-bottom: 8px;
+  text-transform: uppercase;
 }
 
 .latest-news__read {
@@ -748,30 +758,29 @@ brand-logo-image svg {
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: white;
+  background-color: #FFF;
   width: 146px;
   height: 43px;
   margin: 0 auto;
   border-radius: 6px;
-  font-weight: bold;
 }
 
 .carousel-overlay .social-name {
   text-transform: uppercase;
   font-family: 'Barlow', sans-serif;
   font-size: 14px;
+  font-weight: 700;
 }
 
 .carousel-overlay .social-icon {
-  margin-left: 5px;
+  margin-left: 10px;
   margin-top: 2px;
 }
 
 .carousel-overlay .social-icon svg {
   height: 17px;
   width: 17px;
-  stroke: currentColor;
-  stroke-width: 1.5;
+  filter: brightness(1) invert(1);
 }
 
 .carousel-image {
@@ -797,7 +806,6 @@ brand-logo-image svg {
 .footer__blocks {
   display: flex;
   flex-wrap: wrap;
-  gap: 3rem;
   justify-content: space-between;
   margin-bottom: 2rem;
 }
@@ -873,10 +881,7 @@ brand-logo-image svg {
   justify-content: space-between;
   width: 1170px;
   margin: 0 auto;
-}
-
-.footer__block {
-  flex: 1 1 0;
+  border-bottom: 1px solid #e53935;
 }
 
 .footer__logo-copy {
@@ -914,7 +919,6 @@ brand-logo-image svg {
 
 /* Footer bottom */
 .footer__bottom {
-  border-top: 1px solid #e53935;
   padding: 1rem 0;
 }
 
@@ -951,7 +955,7 @@ brand-logo-image svg {
   font-weight: 700;
   text-transform: uppercase;
   margin-top: 0;
-  margin-bottom: 3rem;
+  margin-bottom: 2rem;
 }
 
 .footer-links {
@@ -1073,6 +1077,10 @@ brand-logo-image svg {
   font-size: 12px;
 }
 
+.newsletter__discount {
+  color: #EF3636;
+}
+
 .newsletter__form {
   display: flex;
   flex: 1;
@@ -1091,9 +1099,14 @@ brand-logo-image svg {
   padding-left: 10px;
 }
 
+.newsletter__form input::placeholder {
+  color: #FFFFFF;
+  opacity: 1;
+}
+
 .newsletter__form button {
   width: 170px;
-  height: 31px;
+  height: 41px;
   background-color: #e53935;
   color: #fff;
   border: none;
@@ -1101,28 +1114,9 @@ brand-logo-image svg {
   font-weight: 600;
   font-size: 14px;
   font-family: 'Poppins', sans-serif;
-  text-transform: uppercase;
   cursor: pointer;
 }
 
 .newsletter__form button:hover {
   background-color: #d62828;
 }
-
-@media screen and (max-width: 768px) {
-  .newsletter__inner {
-    flex-direction: column;
-    align-items: flex-start;
-  }
-
-  .newsletter__form {
-    width: 100%;
-    flex-direction: column;
-  }
-
-  .newsletter__form input[type="email"],
-  .newsletter__form button {
-    width: 100%;
-    border-radius: 6px;
-    margin-bottom: 1rem;
-  }
