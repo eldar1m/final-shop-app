@@ -1279,6 +1279,10 @@ brand-logo-image svg {
   color: black;
 }
 
+.size-option:hover {
+  background-color: #fdb0b0;
+}
+
 .size-option input[type="radio"] {
   display: none;
 }
@@ -1324,6 +1328,15 @@ brand-logo-image svg {
   border: 1px;
   background-color: #989898;
   color: #fff;
+  cursor: pointer;
+}
+
+.product-page-add-to-cart:hover {
+  background-color: #d6d6d6;
+}
+
+.product-page-add-to-wishlist:hover {
+  background-color: #fdb0b0;
 }
 
 .product-page-add-to-wishlist {
@@ -1332,6 +1345,7 @@ brand-logo-image svg {
   border-radius: 6px;
   border: 1px solid #EF3636;
   background-color: #fff;
+  cursor: pointer;
 }
 
 .attribute-content {
@@ -1358,6 +1372,11 @@ brand-logo-image svg {
   font-weight: 600;
   font-size: 14px;
   appearance: none;
+  cursor: pointer;
+}
+
+.product-attribute-selector select:hover {
+  background-color: #fdb0b0;
 }
 
 .product-attribute-selector select option {
