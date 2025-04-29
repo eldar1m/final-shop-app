@@ -1,6 +1,11 @@
-{% comment %}
-  Product page layout based on uploaded design
-{% endcomment %}
+{% assign gender = '' %}
+{% for tag in product.tags %}
+  {% if tag contains 'gender:men' %}
+    {% assign gender = 'For Men' %}
+  {% elsif tag contains 'gender:women' %}
+    {% assign gender = 'For Women' %}
+  {% endif %}
+{% endfor %}
 
 <div class="product-page">
   <div class="product-gallery">
@@ -11,12 +16,13 @@
     {% endfor %}
   </div>
 
-  <div class="product-info">
+  <div class="product-page-product-info">
     <div class="product-breadcrumb">
-      {% for collection in product.collections %}
-        <span>{{ collection.title }}</span>
-      {% endfor %}
-      / {{ product.title }}
+      {% if gender != '' %}
+        <span class="path-item">{{ gender }}</span> /
+      {% endif %}
+      <span class="path-item">{{ product.vendor }}</span> /
+      <span class="path-item">{{ product.title }}</span>
     </div>
 
     <div class="product-page-product-title">
@@ -32,19 +38,17 @@
       <div class="product-page-product-variants">
         {% for variant in product.variants %}
           <label class="variant-button {% if variant.available == false %}disabled{% endif %}">
-            <div class="size-options">
-              <label class="size-option">
-                <input
-                  type="radio"
-                  name="size"
-                  value="{{ variant.title }}"
-                  {% unless variant.available %}
-                    disabled
-                  {% endunless %}
-                >
-                <span>{{ variant.title }}</span>
-              </label>
-            </div>
+            <label class="size-option">
+              <input
+                type="radio"
+                name="size"
+                value="{{ variant.title }}"
+                {% unless variant.available %}
+                  disabled
+                {% endunless %}
+              >
+              <span>{{ variant.title }}</span>
+            </label>
           </label>
         {% endfor %}
       </div>
@@ -52,23 +56,50 @@
       <div class="product-actions">
         <button
           type="submit"
-          class="add-to-cart"
+          class="product-page-add-to-cart"
           {% unless product.available %}
             disabled
           {% endunless %}
         >
           Add to cart
         </button>
-        <button type="button" class="add-to-wishlist">Add to wishlist</button>
+        <button type="button" class="product-page-add-to-wishlist">Add to wishlist</button>
       </div>
     </form>
 
     <div class="product-page-product-description">
-      <div>
-        {{ product.description }}
+      <div class="product-attribute-selector">
+        <select id="attribute-select">
+          <option value="description">Description</option>
+          <option value="reviews">Reviews</option>
+        </select>
+        <div class="select-icon-down">
+          {% render 'icon-chevron-down' %}
+        </div>
+      </div>
+
+      <div class="product-attribute-content">
+        <div id="description-content" class="attribute-content active">
+          {{ product.description }}
+        </div>
+
+        <div id="reviews-content" class="attribute-content">reviews</div>
       </div>
     </div>
   </div>
 </div>
 
 {% section 'products-section' %}
+
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    const select = document.getElementById('attribute-select');
+    const contents = document.querySelectorAll('.attribute-content');
+
+    select.addEventListener('change', function () {
+      contents.forEach((content) => content.classList.remove('active'));
+      const selected = document.getElementById(`${this.value}-content`);
+      if (selected) selected.classList.add('active');
+    });
+  });
+</script>
