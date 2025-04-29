@@ -238,6 +238,19 @@
           "contact_VTpaVp"
         ],
         "settings": {}
+      },
+      "cart-drawer": {
+        "type": "cart-drawer",
+        "settings": {}
+      },
+      "products-section": {
+        "type": "products-section",
+        "settings": {
+          "heading": "Our Products",
+          "featured_products": "all",
+          "initial_count": 8,
+          "number_of_products_displayed": 4
+        }
       }
     },
     "content_for_index": []
