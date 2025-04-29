@@ -1314,9 +1314,6 @@ brand-logo-image svg {
 }
 
 .product-actions {
-  font-family: 'Poppins', sans-serif;
-  font-weight: 600;
-  font-size: 14px;
   display: flex;
   justify-content: space-between;
 }
@@ -1329,14 +1326,13 @@ brand-logo-image svg {
   background-color: #989898;
   color: #fff;
   cursor: pointer;
+  font-family: 'Poppins', sans-serif;
+  font-weight: 600;
+  font-size: 14px;
 }
 
 .product-page-add-to-cart:hover {
   background-color: #d6d6d6;
-}
-
-.product-page-add-to-wishlist:hover {
-  background-color: #fdb0b0;
 }
 
 .product-page-add-to-wishlist {
@@ -1346,6 +1342,13 @@ brand-logo-image svg {
   border: 1px solid #EF3636;
   background-color: #fff;
   cursor: pointer;
+  font-family: 'Poppins', sans-serif;
+  font-weight: 600;
+  font-size: 14px;
+}
+
+.product-page-add-to-wishlist:hover {
+  background-color: #fdb0b0;
 }
 
 .attribute-content {
