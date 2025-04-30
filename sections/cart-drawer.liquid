@@ -1,28 +1,40 @@
 <div id="cart-drawer" class="cart-drawer">
   <div class="cart-drawer-overlay"></div>
-
-  <div class="cart-drawer-content">
+  <div class="cart-header">
     <h2>Your Cart</h2>
+    <button class="close-cart">×</button>
+  </div>
 
-    <div class="cart-items">
-      {% for item in cart.items %}
-        <div class="cart-item">
-          <img src="{{ item.image | img_url: 'small' }}" alt="{{ item.product.title }}">
-          <div>
-            <p>{{ item.product.title }}</p>
-            <p>Qty: {{ item.quantity }}</p>
-            <p>{{ item.final_line_price | money }}</p>
-          </div>
+  <hr class="divider">
+
+  <div class="cart-items">
+    {% for item in cart.items %}
+      <div class="cart-item">
+        <img src="{{ item.image | img_url: 'medium' }}" alt="{{ item.product.title }}">
+        <div class="item-details">
+          <div class="item-title">{{ item.product.title }}</div>
+          <div class="item-variant">{{ item.variant.title }}</div>
+          <div class="item-price">{{ item.line_price | money }}</div>
         </div>
-      {% endfor %}
-    </div>
+        <div class="item-qty">
+          <button class="qty-btn" onclick="updateQty({{ item.variant.id }}, -1)">‹</button>
+          <span>{{ item.quantity }}</span>
+          <button class="qty-btn" onclick="updateQty({{ item.variant.id }}, 1)">›</button>
+        </div>
+        <button class="remove-item" onclick="removeItem({{ item.variant.id }})">×</button>
+      </div>
+    {% endfor %}
+  </div>
 
-    <div class="cart-total">
-      <p>Total: {{ cart.total_price | money }}</p>
-      <a href="/checkout" class="checkout-button">Checkout</a>
+  <div class="cart-footer">
+    <div class="total">
+      <span>Total:</span>
+      <span>{{ cart.total_price | money }}</span>
     </div>
+    <a href="/checkout" class="checkout-btn">Checkout</a>
   </div>
 </div>
+
 <script>
   document.addEventListener('DOMContentLoaded', function () {
     var cartDrawer = document.getElementById('cart-drawer');

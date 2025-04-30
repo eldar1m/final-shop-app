@@ -30,19 +30,19 @@
       {{ product.title }}
     </div>
 
-    <div class="product-page-product-price">
-      {{ product.price | money }}
+    <div class="product-page-product-price" id="product-price">
+      {{ product.selected_or_first_available_variant.price | money }}
     </div>
 
-    <form method="post" action="/cart/add">
+    <form method="post" action="/cart/add" id="add-to-cart-form">
       <div class="product-page-product-variants">
         {% for variant in product.variants %}
-          <label class="variant-button {% if variant.available == false %}disabled{% endif %}">
+          <label class="variant-button {% unless variant.available %}disabled{% endunless %}">
             <label class="size-option">
               <input
                 type="radio"
-                name="size"
-                value="{{ variant.title }}"
+                name="id"
+                value="{{ variant.id }}"
                 {% unless variant.available %}
                   disabled
                 {% endunless %}
@@ -100,6 +100,98 @@
       contents.forEach((content) => content.classList.remove('active'));
       const selected = document.getElementById(`${this.value}-content`);
       if (selected) selected.classList.add('active');
+    });
+  });
+
+  document.addEventListener('DOMContentLoaded', function () {
+    const form = document.getElementById('add-to-cart-form');
+    const cartDrawer = document.getElementById('cart-drawer'); // your cart drawer id
+    const cartOverlay = document.querySelector('.cart-drawer-overlay'); // overlay if you have it
+
+    form.addEventListener('submit', function (e) {
+      e.preventDefault(); // stop the normal form submit
+
+      const formData = new FormData(form);
+
+      for (let [key, value] of formData.entries()) {
+        console.log(key, value);
+      }
+
+      fetch('/cart/add.js', {
+        method: 'POST',
+        body: formData,
+        headers: {
+          Accept: 'application/json',
+        },
+      })
+        .then((response) => {
+          if (!response.ok) {
+            throw new Error('Network response was not ok');
+          }
+          return response.json();
+        })
+        .then((data) => {
+          console.log('Product added to cart:', data);
+          // open the cart drawer
+          cartDrawer.classList.add('active');
+        })
+        .catch((error) => {
+          console.error('Error:', error);
+        });
+    });
+  });
+
+  // Fallback if Shopify.formatMoney doesn't exist
+  if (typeof Shopify === 'undefined') {
+    Shopify = {};
+  }
+
+  Shopify.formatMoney = function (cents, format) {
+    if (typeof cents === 'string') {
+      cents = cents.replace('.', '');
+    }
+
+    const value = parseFloat(cents) / 100;
+
+    format = format || '{{ shop.money_format }}';
+
+    return format.replace(/\{\{\s*(amount|amount_no_decimals)\s*\}\}/, function (match, type) {
+      let formatted = '';
+
+      switch (type) {
+        case 'amount':
+          formatted = value.toFixed(2);
+          break;
+        case 'amount_no_decimals':
+          formatted = Math.round(value).toString();
+          break;
+      }
+
+      return formatted.replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+    });
+  };
+
+  document.addEventListener('DOMContentLoaded', function () {
+    const variantRadios = document.querySelectorAll('input[name="id"]');
+    const priceDisplay = document.getElementById('product-price');
+    const imageDisplay = document.getElementById('product-main-image');
+
+    variantRadios.forEach((radio) => {
+      radio.addEventListener('change', function () {
+        const variantId = this.value;
+
+        // Get variant data from Shopify
+        fetch(`/products/{{ product.handle }}.js`)
+          .then((res) => res.json())
+          .then((productData) => {
+            const selectedVariant = productData.variants.find((v) => v.id == variantId);
+
+            if (selectedVariant) {
+              // Update price
+              priceDisplay.innerText = Shopify.formatMoney(selectedVariant.price, '{{ shop.money_format }}');
+            }
+          });
+      });
     });
   });
 </script>
