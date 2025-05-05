@@ -197,7 +197,6 @@
       "type": "newsletter",
       "settings": {
         "heading": "OUR NEWSSELLER",
-        "subtext": "<p>Subscribe to get more useful information about us and to get you <strong>15% discount</strong> off your next purchase</p>",
         "placeholder": "Enter your e-mail",
         "button_label": "Subscribe"
       }
