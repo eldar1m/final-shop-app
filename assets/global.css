@@ -1132,14 +1132,21 @@ brand-logo-image svg {
 .cart-drawer {
   position: fixed;
   top: 0;
-  right: -400px;
-  /* hidden off screen */
-  width: 400px;
+  right: -485px;
+  width: 485px;
   height: 100%;
-  background: white;
   box-shadow: -2px 0 8px rgba(0, 0, 0, 0.1);
   transition: right 0.3s ease;
   z-index: 9999;
+  background: #FFFFFF;
+  border-left: 1px solid #ddd;
+  display: flex;
+  flex-direction: column;
+  z-index: 1000;
+}
+
+.cart-drawer-content {
+  margin: 20px;
 }
 
 .cart-drawer.active {
@@ -1160,35 +1167,24 @@ brand-logo-image svg {
   z-index: 9998;
 }
 
+.cart-drawer-header {
+  font-family: 'Barlow', sans-serif;
+  font-weight: 700;
+  font-size: 34px;
+  text-transform: uppercase;
+  width: 447px;
+  height: 54px;
+}
+
 .cart-drawer.active~.cart-drawer-overlay {
   opacity: 1;
   pointer-events: all;
 }
 
-
-
-.cart-drawer {
-  position: fixed;
-  top: 0;
-  width: 400px;
-  height: 100%;
-  background: #f4f4f4;
-  border-left: 1px solid #ddd;
-  display: flex;
-  flex-direction: column;
-  z-index: 1000;
-}
-
-.cart-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 20px;
-  font-weight: bold;
-  font-size: 1.5rem;
-}
-
 .close-cart {
+  position: absolute;
+  top: 10;
+  right: 0;
   background: none;
   border: none;
   font-size: 1.5rem;
@@ -1196,28 +1192,51 @@ brand-logo-image svg {
 }
 
 .divider {
-  height: 4px;
+  width: 430px;
+  height: 5px;
   background: #ed1c24;
   border: none;
-  margin: 0 20px;
+  margin: 0 auto;
+}
+
+.cart-items {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
 }
 
 .cart-item {
   display: flex;
   align-items: center;
-  margin: 20px;
-  gap: 10px;
+  justify-content: space-between;
+  width: 428px;
+  height: 100px;
+  padding-top: 20px;
+  gap: 20px;
   position: relative;
 }
 
-.cart-item img {
-  width: 90px;
-  height: auto;
+.cart-item .item-image {
+  width: 100px;
+  height: 100px;
   border-radius: 8px;
+}
+
+.item-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 
 .item-details {
   flex-grow: 1;
+  width: 126px;
+  height: 51px;
+  font-family: 'Barlow', sans-serif;
+  font-weight: 700;
+  font-size: 14px;
+  text-transform: uppercase;
 }
 
 .item-title {
@@ -1237,12 +1256,15 @@ brand-logo-image svg {
 }
 
 .item-qty {
+  width: 100px;
+  height: 42px;
   display: flex;
   align-items: center;
+  justify-content: center;
   gap: 8px;
-  border: 1px solid #ed1c24;
+  border: 1px solid #EF3636;
   padding: 4px 8px;
-  border-radius: 4px;
+  border-radius: 3px;
 }
 
 .qty-btn {
@@ -1253,40 +1275,53 @@ brand-logo-image svg {
 }
 
 .remove-item {
-  position: absolute;
-  top: 0;
-  right: 0;
-  background: none;
-  border: none;
-  font-size: 1.2rem;
   cursor: pointer;
 }
 
 .cart-footer {
   margin-top: auto;
-  padding: 20px;
+  width: 485px;
+  height: 154px;
   background: #1a1a1a;
   color: white;
-  display: flex;
-  flex-direction: column;
+
   gap: 10px;
 }
 
+.cart-footer-elements {
+  margin-top: 30px;
+  display: flex;
+  gap: 30px;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+}
+
 .total {
+  width: 431px;
+  height: 27px;
+  font-family: 'Barlow', sans-serif;
+  font-weight: 700;
+  font-size: 20px;
+  text-transform: uppercase;
   display: flex;
   justify-content: space-between;
-  font-weight: bold;
 }
 
 .checkout-btn {
-  background: #ed1c24;
+  width: 431px;
+  height: 41px;
+  background: #EF3636;
   color: white;
-  text-align: center;
-  padding: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   border-radius: 6px;
   text-transform: uppercase;
-  font-weight: bold;
   text-decoration: none;
+  font-family: 'Poppins', sans-serif;
+  font-weight: 600;
+  font-size: 14px;
 }
 
 .checkout-button {

@@ -28,3 +28,44 @@
     });
   });
 </script>
+
+{% schema %}
+{
+  "name": "Products Section",
+  "limit": 1,
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Our Products"
+    },
+    {
+      "type": "collection",
+      "id": "featured_products",
+      "label": "Collection"
+    },
+    {
+      "type": "number",
+      "id": "initial_count",
+      "label": "Initial Count",
+      "default": 8
+    },
+    {
+      "type": "range",
+      "id": "number_of_products_displayed",
+      "label": "Number of products to show initially",
+      "min": 4,
+      "max": 12,
+      "default": 8,
+      "info": "Must be a multiple of 4 for layout consistency."
+    }
+  ],
+  "presets": [
+    {
+      "name": "Products Section",
+      "category": "Custom"
+    }
+  ]
+}
+{% endschema %}
