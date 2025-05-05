@@ -19,6 +19,6 @@
         $0.00
       {% endif %}
     </div>
-    <button class="product-button" onclick="{{ product.url | default: '#' }}">View product</button>
+    <a class="product-button" href="{{ product.url | default: '#' }}">View product</a>
   </div>
 </div>

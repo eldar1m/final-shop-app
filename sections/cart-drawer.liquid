@@ -10,7 +10,7 @@
 
     <div class="cart-items">
       {% for item in cart.items %}
-        <div class="cart-item">
+        <div class="cart-item" data-variant-id="{{ item.variant.id }}" data-key="{{ item.key }}">
           <div class="item-image">
             <img src="{{ item.image | img_url: 'medium' }}" alt="{{ item.product.title }}">
           </div>
@@ -20,13 +20,11 @@
             <div class="item-price">{{ item.line_price | money_without_trailing_zeros }}</div>
           </div>
           <div class="item-qty">
-            <button class="qty-btn" onclick="updateQty({{ item.variant.id }}, -1)">‹</button>
-            <span>{{ item.quantity }}</span>
-            <button class="qty-btn" onclick="updateQty({{ item.variant.id }}, 1)">›</button>
+            <button class="qty-btn" data-change="-1">‹</button>
+            <span class="item-quantity">{{ item.quantity }}</span>
+            <button class="qty-btn" data-change="1">›</button>
           </div>
-          <a class="remove-item" onclick="removeItem({{ item.variant.id }})">
-            {% render 'icon-close' %}
-          </a>
+          <a class="remove-item">{% render 'icon-close' %}</a>
         </div>
       {% endfor %}
     </div>
@@ -35,7 +33,7 @@
     <div class="cart-footer-elements">
       <div class="total">
         <span>Total:</span>
-        <span>{{ cart.total_price | money }}</span>
+        <span id="cart-total">{{ cart.total_price | money }}</span>
       </div>
       <a href="/checkout" class="checkout-btn">Checkout</a>
     </div>
@@ -44,31 +42,110 @@
 
 <script>
   document.addEventListener('DOMContentLoaded', function () {
-    var cartDrawer = document.getElementById('cart-drawer');
-    var cartIcon = document.getElementById('cart-icon');
-    var overlay = document.querySelector('.cart-drawer-overlay');
+    const cartDrawer = document.getElementById('cart-drawer');
+    const cartIcon = document.getElementById('cart-icon');
+    const overlay = document.querySelector('.cart-drawer-overlay');
+    const closeCartBtn = document.querySelector('.close-cart');
 
-    // Open cart on cart icon click
     cartIcon.addEventListener('click', function () {
-      cartDrawer.classList.add('active');
-      overlay.classList.add('active');
+      fetch('/cart.js')
+        .then((res) => res.json())
+        .then((cart) => {
+          updateCartPrices(cart);
+          cartDrawer.classList.add('active');
+          overlay.classList.add('active');
+        });
     });
 
-    // Close cart when clicking overlay
-    overlay.addEventListener('click', function () {
+    overlay.addEventListener('click', closeCart);
+    closeCartBtn.addEventListener('click', closeCart);
+
+    document.addEventListener('click', function (event) {
+      if (
+        cartDrawer.classList.contains('active') &&
+        !cartDrawer.contains(event.target) &&
+        !cartIcon.contains(event.target)
+      ) {
+        closeCart();
+      }
+    });
+
+    function closeCart() {
       cartDrawer.classList.remove('active');
       overlay.classList.remove('active');
+    }
+
+    function updateCartPrices(cart) {
+      document.getElementById('cart-total').textContent = (cart.total_price / 100).toFixed(2);
+      cart.items.forEach((item) => {
+        const itemEl = document.querySelector(`.cart-item[data-variant-id='${item.variant_id}']`);
+        if (itemEl) {
+          itemEl.querySelector('.item-quantity').textContent = item.quantity;
+          itemEl.querySelector('.item-price').textContent = (item.line_price / 100).toFixed(2);
+        }
+      });
+    }
+
+    document.querySelectorAll('.qty-btn').forEach((button) => {
+      button.addEventListener('click', function () {
+        const itemEl = this.closest('.cart-item');
+        const variantId = parseInt(itemEl.dataset.variantId);
+        const change = parseInt(this.dataset.change);
+
+        fetch('/cart.js')
+          .then((res) => res.json())
+          .then((cart) => {
+            const item = cart.items.find((i) => i.variant_id === variantId);
+            if (!item) return;
+
+            const newQty = item.quantity + change;
+
+            fetch('/cart/change.js', {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json',
+                Accept: 'application/json',
+              },
+              body: JSON.stringify({
+                id: item.key,
+                quantity: newQty,
+              }),
+            })
+              .then((res) => res.json())
+              .then((updatedCart) => updateCartPrices(updatedCart));
+          });
+      });
     });
 
-    // Optional: Close cart if clicking outside cart content
-    document.addEventListener('click', function (event) {
-      if (cartDrawer.classList.contains('active')) {
-        // If click is outside the cart drawer content
-        if (!cartDrawer.contains(event.target) && !cartIcon.contains(event.target)) {
-          cartDrawer.classList.remove('active');
-          overlay.classList.remove('active');
-        }
-      }
+    document.querySelectorAll('.remove-item').forEach((button) => {
+      button.addEventListener('click', function () {
+        const itemEl = this.closest('.cart-item');
+        const variantId = parseInt(itemEl.dataset.variantId);
+
+        fetch('/cart.js')
+          .then((res) => res.json())
+          .then((cart) => {
+            const item = cart.items.find((i) => i.variant_id === variantId);
+            if (!item) return;
+
+            fetch('/cart/change.js', {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json',
+                Accept: 'application/json',
+              },
+              body: JSON.stringify({
+                id: item.key,
+                quantity: 0,
+              }),
+            })
+              .then((res) => res.json())
+              .then((updatedCart) => {
+                itemEl.remove();
+                updateCartPrices(updatedCart);
+              });
+          });
+      });
     });
   });
 </script>
