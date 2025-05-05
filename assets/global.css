@@ -68,6 +68,7 @@ body {
   width: 475px;
   margin: 0 auto;
   justify-content: space-between;
+  position: relative;
 }
 
 .menu-item {
@@ -102,10 +103,15 @@ body {
   display: block;
 }
 
+.menu-parent {
+  position: relative;
+}
+
 .dropdown-menu {
   display: none;
   position: absolute;
   top: 100%;
+  /* directly below the parent */
   left: 0;
   background: #fff;
   padding: 1rem 0;
@@ -115,6 +121,12 @@ body {
   min-width: 200px;
   border-radius: 6px;
 }
+
+/* Show dropdown on hover */
+.menu-parent:hover .dropdown-menu {
+  display: block;
+}
+
 
 .dropdown-link {
   display: block;
@@ -1143,16 +1155,19 @@ brand-logo-image svg {
   border-left: 1px solid #ddd;
   display: flex;
   flex-direction: column;
-  z-index: 1000;
+  overflow: hidden;
 }
 
 .cart-drawer-content {
-  margin: 20px;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  margin: 0;
 }
 
 .cart-drawer.active {
   right: 0;
-  /* slide into view */
 }
 
 .cart-drawer-overlay {
@@ -1168,6 +1183,11 @@ brand-logo-image svg {
   z-index: 9998;
 }
 
+.cart-drawer.active~.cart-drawer-overlay {
+  opacity: 1;
+  pointer-events: all;
+}
+
 .cart-drawer-header {
   font-family: 'Barlow', sans-serif;
   font-weight: 700;
@@ -1175,11 +1195,7 @@ brand-logo-image svg {
   text-transform: uppercase;
   width: 447px;
   height: 54px;
-}
-
-.cart-drawer.active~.cart-drawer-overlay {
-  opacity: 1;
-  pointer-events: all;
+  margin: 0 auto;
 }
 
 .close-cart {
@@ -1201,10 +1217,14 @@ brand-logo-image svg {
 }
 
 .cart-items {
+  width: 428px;
+  flex: 1;
+  overflow-y: auto;
+  padding: 20px;
+  margin: 0 auto;
   display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  align-items: center;
+  flex-direction: column;
+  gap: 20px;
 }
 
 .cart-item {
@@ -1213,7 +1233,6 @@ brand-logo-image svg {
   justify-content: space-between;
   width: 428px;
   height: 100px;
-  padding-top: 20px;
   gap: 20px;
   position: relative;
 }
@@ -1280,12 +1299,14 @@ brand-logo-image svg {
 }
 
 .cart-footer {
-  margin-top: auto;
+  flex-shrink: 0;
+  position: sticky;
+  bottom: 0;
+  z-index: 1;
   width: 485px;
   height: 154px;
   background: #1a1a1a;
   color: white;
-
   gap: 10px;
 }
 
@@ -1323,17 +1344,6 @@ brand-logo-image svg {
   font-family: 'Poppins', sans-serif;
   font-weight: 600;
   font-size: 14px;
-}
-
-.checkout-button {
-  display: block;
-  width: 100%;
-  background: #000;
-  color: #fff;
-  text-align: center;
-  padding: 12px 0;
-  margin-top: 20px;
-  text-decoration: none;
 }
 
 .product-page {
