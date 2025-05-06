@@ -13,6 +13,10 @@
     <style>
       {% render 'css-vars' %}
     </style>
+    <script>
+      window.ShopifyCurrencyFormat = {{ shop.money_format | json }};
+    </script>
+
     <link rel="stylesheet" href="{{ 'global.css' | asset_url }}">
   </head>
   <body>

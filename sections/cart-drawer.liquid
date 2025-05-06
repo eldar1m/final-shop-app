@@ -69,7 +69,7 @@
           <div class="item-details">
             <div class="item-title">${item.product_title}</div>
             <div class="item-variant">${item.variant_title}</div>
-            <div class="item-price">${item.line_price}</div>
+            <div class="item-price">${formatMoneyWithoutTrailingZeros(item.line_price)}</div>
           </div>
           <div class="item-qty">
             <button class="qty-btn" data-change="-1">‹</button>
@@ -86,6 +86,26 @@
 
       bindCartItemEvents();
     };
+
+    function formatMoneyWithoutTrailingZeros(cents, format) {
+      // Default to Shopify format if not provided
+      format = format || window.ShopifyCurrencyFormat || '${{amount}}';
+
+      // Ensure format contains the placeholder
+      if (!format.includes('{{amount}}')) {
+        return cents; // fallback raw cents if something goes wrong
+      }
+
+      // Format the cents to dollars
+      let amount = (cents / 100).toFixed(2);
+
+      // Remove .00 or trailing zero from .50, etc.
+      amount = amount.replace(/\.00$/, '');
+      amount = amount.replace(/(\.\d)0$/, '$1');
+
+      format = format.replace('\{\{amount}}', amount);
+      return format;
+    }
 
     function bindCartItemEvents() {
       document.querySelectorAll('.qty-btn').forEach((button) => {
