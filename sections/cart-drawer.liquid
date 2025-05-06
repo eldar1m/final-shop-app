@@ -88,18 +88,13 @@
     };
 
     function formatMoneyWithoutTrailingZeros(cents, format) {
-      // Default to Shopify format if not provided
       format = format || window.ShopifyCurrencyFormat || '${{amount}}';
 
-      // Ensure format contains the placeholder
       if (!format.includes('{{amount}}')) {
-        return cents; // fallback raw cents if something goes wrong
+        return cents;
       }
-
-      // Format the cents to dollars
       let amount = (cents / 100).toFixed(2);
 
-      // Remove .00 or trailing zero from .50, etc.
       amount = amount.replace(/\.00$/, '');
       amount = amount.replace(/(\.\d)0$/, '$1');
 
