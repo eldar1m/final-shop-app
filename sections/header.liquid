@@ -22,11 +22,8 @@
       <div class="menu-item-wrapper">
         {% for link in main_menu_linklist %}
           {% if link.links != blank %}
-            {% assign has_children = link.links | replace: '-', '_' %}
-            {% if has_children %}
-              <a
-                class="menu-item with-chevron {% if link.url == current_page %}menu-item-active{% endif %}"
-              >
+            <div class="menu-parent">
+              <a href="{{ link.url }}" class="menu-item with-chevron">
                 {{ link.title }}
                 {% render 'icon-dropdown' %}
               </a>
@@ -35,10 +32,7 @@
                   <a href="{{ childlink.url }}" class="dropdown-link">{{ childlink.title }}</a>
                 {% endfor %}
               </div>
-            {% else %}
-
-            {% endif %}
-
+            </div>
           {% else %}
             <a href="{{ link.url }}" class="menu-item">{{ link.title }}</a>
           {% endif %}
