@@ -8,26 +8,7 @@
 
     <hr class="divider">
 
-    <div class="cart-items">
-      {% for item in cart.items %}
-        <div class="cart-item" data-variant-id="{{ item.variant.id }}" data-key="{{ item.key }}">
-          <div class="item-image">
-            <img src="{{ item.image | img_url: 'medium' }}" alt="{{ item.product.title }}">
-          </div>
-          <div class="item-details">
-            <div class="item-title">{{ item.product.title }}</div>
-            <div class="item-variant">{{ item.variant.title }}</div>
-            <div class="item-price">{{ item.line_price | money_without_trailing_zeros }}</div>
-          </div>
-          <div class="item-qty">
-            <button class="qty-btn" data-change="-1">‹</button>
-            <span class="item-quantity">{{ item.quantity }}</span>
-            <button class="qty-btn" data-change="1">›</button>
-          </div>
-          <a class="remove-item">{% render 'icon-close' %}</a>
-        </div>
-      {% endfor %}
-    </div>
+    <div class="cart-items"></div>
   </div>
   <div class="cart-footer">
     <div class="cart-footer-elements">
@@ -51,7 +32,7 @@
       fetch('/cart.js')
         .then((res) => res.json())
         .then((cart) => {
-          updateCartPrices(cart);
+          renderCart(cart);
           cartDrawer.classList.add('active');
           overlay.classList.add('active');
         });
@@ -75,77 +56,96 @@
       overlay.classList.remove('active');
     }
 
-    function updateCartPrices(cart) {
-      document.getElementById('cart-total').textContent = (cart.total_price / 100).toFixed(2);
+    window.renderCart = function renderCart(cart) {
+      const cartItemsContainer = document.querySelector('.cart-items');
+      cartItemsContainer.innerHTML = '';
+
       cart.items.forEach((item) => {
-        const itemEl = document.querySelector(`.cart-item[data-variant-id='${item.variant_id}']`);
-        if (itemEl) {
-          itemEl.querySelector('.item-quantity').textContent = item.quantity;
-          itemEl.querySelector('.item-price').textContent = (item.line_price / 100).toFixed(2);
-        }
+        const itemHTML = `
+          <div class="cart-item" data-variant-id="${item.variant_id}$" data-key="${item.key}">
+          <div class="item-image">
+            <img src="${item.image}" alt="${item.product_title}">
+          </div>
+          <div class="item-details">
+            <div class="item-title">${item.product_title}</div>
+            <div class="item-variant">${item.variant_title}</div>
+            <div class="item-price">${item.line_price}</div>
+          </div>
+          <div class="item-qty">
+            <button class="qty-btn" data-change="-1">‹</button>
+            <span class="item-quantity">${item.quantity}</span>
+            <button class="qty-btn" data-change="1">›</button>
+          </div>
+          <a class="remove-item">{% render 'icon-close' %}</a>
+        </div>
+        `;
+        cartItemsContainer.insertAdjacentHTML('beforeend', itemHTML);
+      });
+
+      document.getElementById('cart-total').textContent = (cart.total_price / 100).toFixed(2);
+
+      bindCartItemEvents();
+    };
+
+    function bindCartItemEvents() {
+      document.querySelectorAll('.qty-btn').forEach((button) => {
+        button.addEventListener('click', function () {
+          const itemEl = this.closest('.cart-item');
+          const variantId = parseInt(itemEl.dataset.variantId);
+          const change = parseInt(this.dataset.change);
+
+          fetch('/cart.js')
+            .then((res) => res.json())
+            .then((cart) => {
+              const item = cart.items.find((i) => i.variant_id === variantId);
+              if (!item) return;
+
+              const newQty = item.quantity + change;
+
+              fetch('/cart/change.js', {
+                method: 'POST',
+                headers: {
+                  'Content-Type': 'application/json',
+                  Accept: 'application/json',
+                },
+                body: JSON.stringify({
+                  id: item.key,
+                  quantity: newQty,
+                }),
+              })
+                .then((res) => res.json())
+                .then((updatedCart) => renderCart(updatedCart));
+            });
+        });
+      });
+
+      document.querySelectorAll('.remove-item').forEach((button) => {
+        button.addEventListener('click', function () {
+          const itemEl = this.closest('.cart-item');
+          const variantId = parseInt(itemEl.dataset.variantId);
+
+          fetch('/cart.js')
+            .then((res) => res.json())
+            .then((cart) => {
+              const item = cart.items.find((i) => i.variant_id === variantId);
+              if (!item) return;
+
+              fetch('/cart/change.js', {
+                method: 'POST',
+                headers: {
+                  'Content-Type': 'application/json',
+                  Accept: 'application/json',
+                },
+                body: JSON.stringify({
+                  id: item.key,
+                  quantity: 0,
+                }),
+              })
+                .then((res) => res.json())
+                .then((updatedCart) => renderCart(updatedCart));
+            });
+        });
       });
     }
-
-    document.querySelectorAll('.qty-btn').forEach((button) => {
-      button.addEventListener('click', function () {
-        const itemEl = this.closest('.cart-item');
-        const variantId = parseInt(itemEl.dataset.variantId);
-        const change = parseInt(this.dataset.change);
-
-        fetch('/cart.js')
-          .then((res) => res.json())
-          .then((cart) => {
-            const item = cart.items.find((i) => i.variant_id === variantId);
-            if (!item) return;
-
-            const newQty = item.quantity + change;
-
-            fetch('/cart/change.js', {
-              method: 'POST',
-              headers: {
-                'Content-Type': 'application/json',
-                Accept: 'application/json',
-              },
-              body: JSON.stringify({
-                id: item.key,
-                quantity: newQty,
-              }),
-            })
-              .then((res) => res.json())
-              .then((updatedCart) => updateCartPrices(updatedCart));
-          });
-      });
-    });
-
-    document.querySelectorAll('.remove-item').forEach((button) => {
-      button.addEventListener('click', function () {
-        const itemEl = this.closest('.cart-item');
-        const variantId = parseInt(itemEl.dataset.variantId);
-
-        fetch('/cart.js')
-          .then((res) => res.json())
-          .then((cart) => {
-            const item = cart.items.find((i) => i.variant_id === variantId);
-            if (!item) return;
-
-            fetch('/cart/change.js', {
-              method: 'POST',
-              headers: {
-                'Content-Type': 'application/json',
-                Accept: 'application/json',
-              },
-              body: JSON.stringify({
-                id: item.key,
-                quantity: 0,
-              }),
-            })
-              .then((res) => res.json())
-              .then((updatedCart) => {
-                itemEl.remove();
-                updateCartPrices(updatedCart);
-              });
-          });
-      });
-    });
   });
 </script>
