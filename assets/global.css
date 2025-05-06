@@ -772,6 +772,7 @@ brand-logo-image svg {
   display: flex;
   align-items: center;
   justify-content: center;
+  pointer-events: auto;
 }
 
 .carousel-overlay .social {
@@ -783,6 +784,7 @@ brand-logo-image svg {
   height: 43px;
   margin: 0 auto;
   border-radius: 6px;
+  cursor: pointer;
 }
 
 .carousel-overlay .social-name {
@@ -1118,6 +1120,7 @@ brand-logo-image svg {
   font-weight: 400;
   font-size: 12px;
   padding-left: 10px;
+  color: #fff;
 }
 
 .newsletter__form input::placeholder {

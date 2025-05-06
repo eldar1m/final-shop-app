@@ -33,12 +33,6 @@
   </div>
   <div class="carousel-section">
     <div class="carousel">
-      <div class="carousel-overlay">
-        <div class="social">
-          <span class="social-name">@{{ shop.name }}</span>
-          <span class="social-icon">{% render 'icon-instagram' %}</span>
-        </div>
-      </div>
       {% for block in section.blocks %}
         <div class="carousel-image">
           <img
@@ -47,6 +41,13 @@
           >
         </div>
       {% endfor %}
+
+      <div class="carousel-overlay">
+        <div class="social">
+          <span class="social-name">@{{ shop.name }}</span>
+          <span class="social-icon">{% render 'icon-instagram' %}</span>
+        </div>
+      </div>
     </div>
   </div>
 </section>
