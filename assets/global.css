@@ -374,7 +374,8 @@ body {
   flex-direction: column;
   justify-content: space-between;
   column-gap: 1rem;
-  height: 100%;
+  width: 270px;
+  height: 356px;
 }
 
 .product-card__image-wrapper {
@@ -1480,6 +1481,37 @@ brand-logo-image svg {
   position: absolute;
 }
 
+
+.size-option-overlay {
+  width: 30px;
+  height: 30px;
+  font-size: 10px;
+}
+
+.size-option-overlay input:disabled+span {
+  font-size: 10px;
+}
+
+.variant-form {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6.5px;
+  width: 50%;
+  align-content: space-between;
+  justify-content: center;
+}
+
+.variant-overlay-image {
+  width: 150px;
+  height: 150px;
+}
+
+.variant-overlay-image img {
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+}
+
 .product-actions {
   display: flex;
   justify-content: space-between;
@@ -1569,4 +1601,71 @@ brand-logo-image svg {
   width: 35px;
   height: 15px;
   stroke: red;
+}
+
+.collection-products {
+  width: 1170px;
+  margin: 0 auto;
+}
+
+.collection-products li {
+  list-style: none;
+}
+
+.variant-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.6);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  z-index: 10000;
+}
+
+.variant-overlay.active {
+  display: flex;
+}
+
+.variant-overlay-content {
+  background: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  position: relative;
+  max-width: 300px;
+}
+
+.variant-overlay-items {
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: space-between;
+  gap: 5px;
+}
+
+.close-variant-overlay {
+  position: absolute;
+  top: 5px;
+  right: 2px;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.variant-overlay-add-to-cart {
+  width: 270px;
+  height: 41px;
+  border-radius: 6px;
+  border: 1px;
+  background-color: #989898;
+  color: #fff;
+  cursor: pointer;
+  font-family: 'Poppins', sans-serif;
+  font-weight: 600;
+  font-size: 14px;
+}
+
+.variant-overlay-add-to-cart:hover {
+  background-color: #d6d6d6;
 }

@@ -1,33 +1,35 @@
-<div class="product-card">
-  <div class="product-card__image-wrapper">
-    {% if product %}
-      <img src="{{ product.featured_image | img_url: 'master' }}" alt="{{ product.title }}">
-    {% else %}
-      <div class="product-placeholder"></div>
-    {% endif %}
-    {% unless product.available %}
-      <div class="product-out-of-stock">Out of stock</div>
-    {% endunless %}
-  </div>
-  <div class="product-card__info">
-    <div class="product-vendor">{{ product.vendor | default: 'Vendor' }}</div>
-    <div class="product-title">{{ product.title | default: 'Product Title' }}</div>
-    <div class="product-price">
-      {% if product.price %}
-        {{ product.price | money_without_trailing_zeros }}
-      {% else %}
-        $0.00
-      {% endif %}
+<div class="variant-overlay" id="variant-overlay-{{ product.id }}">
+  <div class="variant-overlay-content">
+    <button class="close-variant-overlay">{% render 'icon-close' %}</button>
+
+    <div class="variant-overlay-items">
+      <div class="variant-overlay-image">
+        <img src="{{ product.featured_image | img_url: 'compact' }}" alt="{{ product.title }}">
+      </div>
+      <form class="variant-form" data-product-id="{{ product.id }}">
+        {% for variant in product.variants %}
+          <label class="size-option size-option-overlay">
+            <input
+              type="radio"
+              name="variant_id"
+              value="{{ variant.id }}"
+              {% if forloop.first %}
+                checked
+              {% endif %}
+
+              {% unless variant.available %}
+                disabled
+              {% endunless %}
+            >
+            <span>{{ variant.title }}</span>
+          </label>
+        {% endfor %}
+        <button type="submit" class="variant-overlay-add-to-cart">Add to Cart</button>
+      </form>
     </div>
-    {% if product.variants.size > 1 %}
-      {% comment %} <a class="product-button" href="{{ product.url | default: '#' }}">View product</a> {% endcomment %}
-      <button class="open-variant-overlay product-button" data-product-id="{{ product.id }}">Select Options</button>
-      {% render 'variants-overlay', product: product %}
-    {% else %}
-      <a class="product-button" href="{{ product.url | default: '#' }}">Quick add</a>
-    {% endif %}
   </div>
 </div>
+
 <script>
   document.addEventListener('DOMContentLoaded', function () {
     // Open overlay

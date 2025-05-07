@@ -1,0 +1,30 @@
+{% schema %}
+{
+  "name": "Collection Filters",
+  "settings": []
+}
+{% endschema %}
+
+<div class="collection-filters">
+  {% if collection.all_tags.size > 0 %}
+    <form method="get" action="{{ collection.url }}">
+      <fieldset>
+        <legend>Filter by tag</legend>
+        {% for tag in collection.all_tags %}
+          <label>
+            <input
+              type="checkbox"
+              name="constraint"
+              value="{{ tag }}"
+              {% if current_tags contains tag %}
+                checked
+              {% endif %}
+            >
+            {{ tag }}
+          </label>
+        {% endfor %}
+        <button type="submit">Apply</button>
+      </fieldset>
+    </form>
+  {% endif %}
+</div>
