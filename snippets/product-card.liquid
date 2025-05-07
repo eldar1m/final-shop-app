@@ -21,8 +21,11 @@
     </div>
     {% if product.variants.size > 1 %}
       {% comment %} <a class="product-button" href="{{ product.url | default: '#' }}">View product</a> {% endcomment %}
-      <button class="open-variant-overlay product-button" data-product-id="{{ product.id }}">Select Options</button>
-      {% render 'variants-overlay', product: product %}
+      <div class="button-class">
+        <button class="open-variant-overlay product-button" data-product-id="{{ product.id }}">Select Options</button>
+        {% render 'variants-overlay', product: product %}
+      </div>
+
     {% else %}
       <a class="product-button" href="{{ product.url | default: '#' }}">Quick add</a>
     {% endif %}
