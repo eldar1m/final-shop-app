@@ -8,15 +8,16 @@
         "collection-banner": {
             "type": "collection-banner",
             "settings": {}
-        },
-        "collection-filter": {
-            "type": "collection-filters",
-            "settings": {}
         }
+        // },
+        // "collection-filter": {
+        //     "type": "collection-filters",
+        //     "settings": {}
+        // }
     },
     "order": [
         "collection-banner",
-        "collection-filter",
+        // "collection-filter",
         "main"
     ]
 }

@@ -1,0 +1,24 @@
+<div
+  class="collection-banner"
+  style="background-image: url({{ collection.image | img_url: 'master' }});"
+>
+  <div class="collection-banner-content">
+    <h1 class="collection-banner-title">{{ collection.title }}</h1>
+    {% if collection.description != blank %}
+      <p>{{ collection.description }}</p>
+    {% endif %}
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Collection Banner",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "background_image",
+      "label": "Background Image"
+    }
+  ]
+}
+{% endschema %}
