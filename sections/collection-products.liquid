@@ -1,20 +1,96 @@
-{% schema %}
-{
-  "name": "Collection Products",
-  "settings": []
-}
-{% endschema %}
+<form method="get" class="collection-sort">
+  <label for="sort-by">Sort by</label>
+  <select name="sort_by" id="sort-by" onchange="this.form.submit()">
+    <option
+      value="best-selling"
+      {% if collection.sort_by == 'best-selling' %}
+        selected
+      {% endif %}
+    >
+      Best selling
+    </option>
+    <option
+      value="price-ascending"
+      {% if collection.sort_by == 'price-ascending' %}
+        selected
+      {% endif %}
+    >
+      Price: Low to High
+    </option>
+    <option
+      value="price-descending"
+      {% if collection.sort_by == 'price-descending' %}
+        selected
+      {% endif %}
+    >
+      Price: High to Low
+    </option>
+    <option
+      value="title-ascending"
+      {% if collection.sort_by == 'title-ascending' %}
+        selected
+      {% endif %}
+    >
+      Alphabetically: A–Z
+    </option>
+    <option
+      value="title-descending"
+      {% if collection.sort_by == 'title-descending' %}
+        selected
+      {% endif %}
+    >
+      Alphabetically: Z–A
+    </option>
+    <option
+      value="created-descending"
+      {% if collection.sort_by == 'created-descending' %}
+        selected
+      {% endif %}
+    >
+      Date: New to Old
+    </option>
+    <option
+      value="created-ascending"
+      {% if collection.sort_by == 'created-ascending' %}
+        selected
+      {% endif %}
+    >
+      Date: Old to New
+    </option>
+  </select>
+</form>
 
 <div class="collection-products">
   {% if collection.products_count > 0 %}
-    <div class="products-grid">
-      {% for product in collection.products %}
-        <div class="product-card-list">
-          {% render 'product-card', product: product %}
-        </div>
-      {% endfor %}
+    <div class="products-grid grid-{{ section.settings.products_per_row }}">
+      {% paginate collection.products by 12 %}
+        {% for product in collection.products %}
+          <div class="product-card-list">
+            {% render 'product-card', product: product %}
+          </div>
+        {% endfor %}
+
+        {% render 'pagination', paginate: paginate %}
+      {% endpaginate %}
     </div>
   {% else %}
     <p>No products found in this collection.</p>
   {% endif %}
 </div>
+
+{% schema %}
+{
+  "name": "Collection Products",
+  "settings": [
+    {
+      "type": "range",
+      "id": "products_per_row",
+      "label": "Products per row",
+      "min": 2,
+      "max": 4,
+      "step": 1,
+      "default": 4
+    }
+  ]
+}
+{% endschema %}

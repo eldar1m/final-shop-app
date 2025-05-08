@@ -11,12 +11,11 @@
           <label class="size-option size-option-overlay">
             <input
               type="radio"
-              name="variant_id"
+              name="id"
               value="{{ variant.id }}"
               {% if forloop.first %}
                 checked
               {% endif %}
-
               {% unless variant.available %}
                 disabled
               {% endunless %}
@@ -24,6 +23,8 @@
             <span>{{ variant.title }}</span>
           </label>
         {% endfor %}
+        <input type="hidden" name="quantity" value="1">
+        <input type="hidden" name="properties[_unique]" value="{{ 'now' | date: '%s' }}">
         <button type="submit" class="variant-overlay-add-to-cart">Add to Cart</button>
       </form>
     </div>
@@ -57,6 +58,7 @@
     // Add to cart + open cart drawer
     document.querySelectorAll('.variant-form').forEach((form) => {
       form.addEventListener('submit', function (e) {
+        console.log('added');
         e.preventDefault();
         const formData = new FormData(form);
         fetch('/cart/add.js', {

@@ -1674,3 +1674,26 @@ brand-logo-image svg {
 .variant-overlay-add-to-cart:hover {
   background-color: #d6d6d6;
 }
+
+.products-grid {
+  display: grid;
+  gap: 2rem;
+}
+
+.grid-2 {
+  grid-template-columns: repeat(2, 1fr);
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+.grid-3 {
+  grid-template-columns: repeat(3, 1fr);
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap
+}
+
+.grid-4 {
+  grid-template-columns: repeat(4, 1fr);
+}
