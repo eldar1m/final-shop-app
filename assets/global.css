@@ -1150,6 +1150,7 @@ brand-logo-image svg {
   position: fixed;
   top: 0;
   right: -485px;
+  right: 0;
   width: 485px;
   height: 100%;
   box-shadow: -2px 0 8px rgba(0, 0, 0, 0.1);
@@ -1776,7 +1777,7 @@ brand-logo-image svg {
   font-weight: 500;
   cursor: pointer;
   outline: none;
-  width: 10px;
+  width: 1px;
 }
 
 #sort-by option {
@@ -1791,4 +1792,21 @@ brand-logo-image svg {
   pointer-events: none;
   color: #333;
   font-size: 1rem;
+}
+
+.cart-upsells {
+  width: 430px;
+  height: 338px;
+  margin: 0 auto;
+  padding-bottom: 20px;
+}
+
+.upsell-grid {
+  margin: 0 auto;
+  padding-left: 30px;
+}
+
+.upsell-grid .product-card {
+  width: 150px;
+  height: 300px;
 }
