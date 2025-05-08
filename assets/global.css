@@ -1800,6 +1800,14 @@ brand-logo-image svg {
   padding-bottom: 20px;
 }
 
+.cart-upsells h3 {
+  font-family: 'Barlow', sans-serif;
+  font-weight: 700;
+  font-size: 20px;
+  text-transform: uppercase;
+  text-align: center;
+}
+
 .upsell-grid {
   margin: 0 auto;
   padding-left: 30px;
