@@ -1,90 +1,93 @@
-<div class="collection-sort">
-  <form method="get" class="sort-dropdown">
-    {% render 'icon-settings' %}
+<div class="collection-section">
+  <div class="collection-sort">
+    <form method="get" class="sort-dropdown">
+      {% render 'icon-settings' %}
 
-    <label for="sort-by" class="sort-label">Sort by</label>
+      <label for="sort-by" class="sort-label">Sort by</label>
 
-    <div class="sort-select-wrapper">
-      <select name="sort_by" id="sort-by" onchange="this.form.submit()">
-        <option disabled></option>
-        <option
-          value="best-selling"
-          {% if collection.sort_by == 'best-selling' %}
-            selected
-          {% endif %}
-        >
-          Best selling
-        </option>
-        <option
-          value="price-ascending"
-          {% if collection.sort_by == 'price-ascending' %}
-            selected
-          {% endif %}
-        >
-          Price: Low to High
-        </option>
-        <option
-          value="price-descending"
-          {% if collection.sort_by == 'price-descending' %}
-            selected
-          {% endif %}
-        >
-          Price: High to Low
-        </option>
-        <option
-          value="title-ascending"
-          {% if collection.sort_by == 'title-ascending' %}
-            selected
-          {% endif %}
-        >
-          Alphabetically: A–Z
-        </option>
-        <option
-          value="title-descending"
-          {% if collection.sort_by == 'title-descending' %}
-            selected
-          {% endif %}
-        >
-          Alphabetically: Z–A
-        </option>
-        <option
-          value="created-descending"
-          {% if collection.sort_by == 'created-descending' %}
-            selected
-          {% endif %}
-        >
-          Date: New to Old
-        </option>
-        <option
-          value="created-ascending"
-          {% if collection.sort_by == 'created-ascending' %}
-            selected
-          {% endif %}
-        >
-          Date: Old to New
-        </option>
-      </select>
-      <span class="sort-arrow">{% render 'icon-chevron-down' %}</span>
-    </div>
-  </form>
-</div>
+      <div class="sort-select-wrapper">
+        <select name="sort_by" id="sort-by" onchange="this.form.submit()">
+          <option disabled></option>
+          <option
+            value="best-selling"
+            {% if collection.sort_by == 'best-selling' %}
+              selected
+            {% endif %}
+          >
+            Best selling
+          </option>
+          <option
+            value="price-ascending"
+            {% if collection.sort_by == 'price-ascending' %}
+              selected
+            {% endif %}
+          >
+            Price: Low to High
+          </option>
+          <option
+            value="price-descending"
+            {% if collection.sort_by == 'price-descending' %}
+              selected
+            {% endif %}
+          >
+            Price: High to Low
+          </option>
+          <option
+            value="title-ascending"
+            {% if collection.sort_by == 'title-ascending' %}
+              selected
+            {% endif %}
+          >
+            Alphabetically: A–Z
+          </option>
+          <option
+            value="title-descending"
+            {% if collection.sort_by == 'title-descending' %}
+              selected
+            {% endif %}
+          >
+            Alphabetically: Z–A
+          </option>
+          <option
+            value="created-descending"
+            {% if collection.sort_by == 'created-descending' %}
+              selected
+            {% endif %}
+          >
+            Date: New to Old
+          </option>
+          <option
+            value="created-ascending"
+            {% if collection.sort_by == 'created-ascending' %}
+              selected
+            {% endif %}
+          >
+            Date: Old to New
+          </option>
+        </select>
+        <span class="sort-arrow">{% render 'icon-chevron-down' %}</span>
+      </div>
+    </form>
+  </div>
 
-<div class="collection-products">
-  {% if collection.products_count > 0 %}
-    <div class="products-grid grid-{{ section.settings.products_per_row }}">
-      {% paginate collection.products by 12 %}
-        {% for product in collection.products %}
-          <div class="product-card-list">
-            {% render 'product-card', product: product %}
-          </div>
-        {% endfor %}
-
-        {% render 'pagination', paginate: paginate %}
+  <div class="collection-products">
+    {% if collection.products_count > 0 %}
+      {% paginate collection.products by 4 %}
+        <div class="products-grid grid-{{ section.settings.products_per_row }}">
+          {% for product in collection.products %}
+            <div class="product-card-list">
+              {% render 'product-card', product: product %}
+            </div>
+          {% endfor %}
+        </div>
+        <div class="pagination-wrapper">
+          {% render 'pagination', paginate: paginate %}
+        </div>
       {% endpaginate %}
-    </div>
-  {% else %}
-    <p>No products found in this collection.</p>
-  {% endif %}
+    {% else %}
+      <p>No products found in this collection.</p>
+    {% endif %}
+  </div>
 </div>
 
 {% schema %}

@@ -1611,6 +1611,11 @@ brand-logo-image svg {
   stroke: red;
 }
 
+.collection-section {
+  margin-top: 50px;
+  margin-bottom: 50px;
+}
+
 .collection-products {
   width: 1170px;
   margin: 0 auto;
@@ -1851,4 +1856,59 @@ brand-logo-image svg {
   .custom-swiper-slide {
     width: 100%;
   }
+}
+
+.pagination-circles {
+  text-align: center;
+  margin-top: 2rem;
+}
+
+.pagination-circles ul {
+  display: inline-flex;
+  gap: 10px;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.pagination-circles li a,
+.pagination-circles li span {
+  display: inline-block;
+  width: 32px;
+  height: 32px;
+  line-height: 32px;
+  border-radius: 50%;
+  text-align: center;
+  font-family: 'Poppins', sans-serif;
+  font-weight: 600;
+  font-size: 14px;
+  color: #e53935;
+  /* red text */
+  background-color: #fff;
+  border: none;
+  text-decoration: none;
+  transition: background 0.3s ease;
+}
+
+.pagination-circles li .active {
+  background-color: #EF3636;
+  /* red background */
+  color: #fff;
+}
+
+.pagination-circles li .inactive {
+  background-color: #F6F6F6;
+  /* red background */
+  color: #EF3636;
+}
+
+.pagination-circles li .ellipsis {
+  color: #e53935;
+  font-size: 20px;
+  pointer-events: none;
+}
+
+
+.pagination-circles .disabled {
+  color: #989898;
 }
