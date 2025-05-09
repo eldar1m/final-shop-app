@@ -1911,4 +1911,6 @@ brand-logo-image svg {
 
 .pagination-circles .disabled {
   color: #989898;
+  cursor: default;
+  pointer-events: none;
 }
