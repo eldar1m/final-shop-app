@@ -1,28 +1,22 @@
-{% if cart.items contains 'jordan' %}
-  {% assign upsell_products = null %}
-{% else %}
-  {% assign upsell_products = collections['upsell-products'].products %}
-{% endif %}
-{% if upsell_products != null %}
-  <div class="cart-upsells">
-    <h3 class="cart-upsells-title">You may also like</h3>
+{% assign upsell_products = collections['upsell-products'].products %}
+<div class="cart-upsells">
+  <h3 class="cart-upsells-title">You may also like</h3>
 
-    <!-- Swiper Container -->
-    <div class="swiper cart-upsell-swiper">
-      <div class="swiper-wrapper upsell-grid">
-        {% for product in upsell_products %}
-          <div class="swiper-slide">
-            {% render 'product-card', product: product %}
-          </div>
-        {% endfor %}
-      </div>
-
-      <!-- Navigation -->
-      <div class="swiper-button-prev"></div>
-      <div class="swiper-button-next"></div>
+  <!-- Swiper Container -->
+  <div class="swiper cart-upsell-swiper">
+    <div class="swiper-wrapper upsell-grid">
+      {% for product in upsell_products %}
+        <div class="swiper-slide">
+          {% render 'product-card', product: product %}
+        </div>
+      {% endfor %}
     </div>
+
+    <!-- Navigation -->
+    <div class="swiper-button-prev"></div>
+    <div class="swiper-button-next"></div>
   </div>
-{% endif %}
+</div>
 
 <script>
   document.addEventListener('DOMContentLoaded', function () {

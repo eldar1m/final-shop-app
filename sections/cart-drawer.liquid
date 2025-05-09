@@ -20,7 +20,9 @@
     </div>
   </div>
 
-  {% render 'upsells' %}
+  {% if cart.item_count > 0 %}
+    {% render 'upsells' %}
+  {% endif %}
 </div>
 
 <script>
