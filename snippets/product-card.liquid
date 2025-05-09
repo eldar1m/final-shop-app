@@ -40,6 +40,15 @@
 
 <script>
   document.addEventListener('DOMContentLoaded', function () {
+    document.querySelectorAll('.product-card-link .product-button').forEach((button) => {
+      button.addEventListener('click', function (e) {
+        e.stopPropagation();
+        e.preventDefault();
+      });
+    });
+  });
+
+  document.addEventListener('DOMContentLoaded', function () {
     document.querySelectorAll('.quick-add-form').forEach((form) => {
       form.addEventListener('submit', function (e) {
         e.preventDefault();
