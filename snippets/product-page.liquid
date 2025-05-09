@@ -36,21 +36,26 @@
 
     <form method="post" action="/cart/add" id="add-to-cart-form">
       <div class="product-page-product-variants">
-        {% for variant in product.variants %}
-          <label class="variant-button {% unless variant.available %}disabled{% endunless %}">
-            <label class="size-option">
-              <input
-                type="radio"
-                name="id"
-                value="{{ variant.id }}"
-                {% unless variant.available %}
-                  disabled
-                {% endunless %}
-              >
-              <span>{{ variant.title }}</span>
+        {% if product.variants.size == 1 and product.variants.first.available %}
+          <input type="hidden" name="id" value="{{ product.variants.first.id }}">
+          Only one size
+        {% else %}
+          {% for variant in product.variants %}
+            <label class="variant-button {% unless variant.available %}disabled{% endunless %}">
+              <label class="size-option">
+                <input
+                  type="radio"
+                  name="id"
+                  value="{{ variant.id }}"
+                  {% unless variant.available %}
+                    disabled
+                  {% endunless %}
+                >
+                <span>{{ variant.title }}</span>
+              </label>
             </label>
-          </label>
-        {% endfor %}
+          {% endfor %}
+        {% endif %}
       </div>
 
       <div class="product-actions">
