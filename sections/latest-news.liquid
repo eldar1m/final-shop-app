@@ -49,27 +49,29 @@
   </div>
 </section>
 
-<script>
-  new Swiper('.latest-news-swiper', {
-    wrapperClass: 'custom-swiper-wrapper',
-    slideClass: 'custom-swiper-slide',
-    pagination: {
-      el: '.custom-swiper-pagination',
-      clickable: true,
-    },
-    loop: false,
-    slidesPerView: 3,
-    spaceBetween: 30,
-    breakpoints: {
-      768: {
-        slidesPerView: 2,
+{% comment %}
+  <script>
+    new Swiper('.latest-news-swiper', {
+      wrapperClass: 'custom-swiper-wrapper',
+      slideClass: 'custom-swiper-slide',
+      pagination: {
+        el: '.custom-swiper-pagination',
+        clickable: true,
       },
-      480: {
-        slidesPerView: 1,
+      loop: false,
+      slidesPerView: 3,
+      spaceBetween: 30,
+      breakpoints: {
+        768: {
+          slidesPerView: 2,
+        },
+        480: {
+          slidesPerView: 1,
+        },
       },
-    },
-  });
-</script>
+    });
+  </script>
+{% endcomment %}
 
 {% schema %}
 {
