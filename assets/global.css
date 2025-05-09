@@ -1800,7 +1800,7 @@ brand-logo-image svg {
   padding-bottom: 20px;
 }
 
-.cart-upsells h3 {
+.cart-upsells-title {
   font-family: 'Barlow', sans-serif;
   font-weight: 700;
   font-size: 20px;
@@ -1816,4 +1816,31 @@ brand-logo-image svg {
 .upsell-grid .product-card {
   width: 150px;
   height: 300px;
+}
+
+.custom-swiper {
+  position: relative;
+  overflow: hidden;
+  width: 1170px;
+  margin: 0 auto;
+}
+
+.custom-swiper-wrapper {
+  display: flex;
+}
+
+.custom-swiper-slide {
+  flex: 0 0 auto;
+}
+
+@media (max-width: 768px) {
+  .custom-swiper-slide {
+    width: calc((100% - 30px) / 2);
+  }
+}
+
+@media (max-width: 480px) {
+  .custom-swiper-slide {
+    width: 100%;
+  }
 }

@@ -7,10 +7,10 @@
     </p>
   </div>
 
-  <div class="swiper latest-news-swiper">
-    <div class="swiper-grid">
+  <div class="custom-swiper latest-news-swiper">
+    <div class="custom-swiper-wrapper">
       {% for article in blogs.news.articles reversed limit: 6 %}
-        <div class="swiper-slide">
+        <div class="custom-swiper-slide">
           <div class="latest-news__card">
             <div class="latest-news__image">
               <a href="{{ article.url }}" class="latest-news__unit">
@@ -20,8 +20,8 @@
             <div class="latest-news__meta">
               <p class="latest-news__date">{{ article.published_at | date: '%b %d, %Y' }}</p>
               <h3 class="latest-news__title">{{ article.title }}</h3>
-              <a href="{{ article.url }}" class="latest-news__read"
-                >Read More
+              <a href="{{ article.url }}" class="latest-news__read">
+                Read More
                 <span class="icon-arrow-right">{% render 'icon-arrow-right' %}</span>
               </a>
             </div>
@@ -29,38 +29,37 @@
         </div>
       {% endfor %}
     </div>
-    <div class="swiper-pagination"></div>
+    <div class="custom-swiper-pagination"></div>
   </div>
+
   <div class="carousel-section">
     <div class="carousel">
-      {% for block in section.blocks %}
-        <div class="carousel-image">
-          <img
-            src="{{ block.settings.image | img_url: 'master' }}"
-            alt="{{ block.settings.image.alt }}"
-          >
-        </div>
-      {% endfor %}
-
       <div class="carousel-overlay">
         <div class="social">
           <span class="social-name">@{{ shop.name }}</span>
           <span class="social-icon">{% render 'icon-instagram' %}</span>
         </div>
       </div>
+      {% for block in section.blocks %}
+        <div class="carousel-image">
+          <img src="{{ block.settings.image | img_url: 'master' }}" alt="{{ block.settings.image.alt }}">
+        </div>
+      {% endfor %}
     </div>
   </div>
 </section>
 
 <script>
-  var latestNewsSwiper = new Swiper('.latest-news-swiper', {
+  new Swiper('.latest-news-swiper', {
+    wrapperClass: 'custom-swiper-wrapper',
+    slideClass: 'custom-swiper-slide',
+    pagination: {
+      el: '.custom-swiper-pagination',
+      clickable: true,
+    },
     loop: false,
     slidesPerView: 3,
     spaceBetween: 30,
-    pagination: {
-      el: '.swiper-pagination',
-      clickable: true,
-    },
     breakpoints: {
       768: {
         slidesPerView: 2,
