@@ -72,7 +72,7 @@
 
   <div class="collection-products">
     {% if collection.products_count > 0 %}
-      {% paginate collection.products by 4 %}
+      {% paginate collection.products by section.settings.products_per_page %}
         <div class="products-grid grid-{{ section.settings.products_per_row }}">
           {% for product in collection.products %}
             <div class="product-card-list">
@@ -102,6 +102,15 @@
       "max": 4,
       "step": 1,
       "default": 4
+    },
+    {
+      "type": "range",
+      "id": "products_per_page",
+      "label": "Products per page",
+      "min": 4,
+      "max": 24,
+      "step": 4,
+      "default": 8
     }
   ]
 }
