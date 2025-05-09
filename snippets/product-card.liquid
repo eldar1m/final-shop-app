@@ -1,65 +1,60 @@
 <div class="product-card">
-  <div class="product-card__image-wrapper">
-    {% if product %}
-      <img src="{{ product.featured_image | img_url: 'master' }}" alt="{{ product.title }}">
-    {% else %}
-      <div class="product-placeholder"></div>
-    {% endif %}
-    {% unless product.available %}
-      <div class="product-out-of-stock">Out of stock</div>
-    {% endunless %}
-  </div>
-  <div class="product-card__info">
-    <div class="product-vendor">{{ product.vendor | default: 'Vendor' }}</div>
-    <div class="product-title">{{ product.title | default: 'Product Title' }}</div>
-    <div class="product-price">
-      {% if product.price %}
-        {{ product.price | money_without_trailing_zeros }}
+  <a href="{{ product.url }}" class="product-card-link">
+    <div class="product-card__image-wrapper">
+      {% if product %}
+        <img src="{{ product.featured_image | img_url: 'master' }}" alt="{{ product.title }}">
       {% else %}
-        $0.00
+        <div class="product-placeholder"></div>
       {% endif %}
+      {% unless product.available %}
+        <div class="product-out-of-stock">Out of stock</div>
+      {% endunless %}
     </div>
-    {% if product.variants.size > 1 %}
-      {% comment %} <a class="product-button" href="{{ product.url | default: '#' }}">View product</a> {% endcomment %}
-      <div class="button-class">
-        <button class="open-variant-overlay product-button" data-product-id="{{ product.id }}">Select Options</button>
-        {% render 'variants-overlay', product: product %}
+    <div class="product-card__info">
+      <div class="product-vendor">{{ product.vendor | default: 'Vendor' }}</div>
+      <div class="product-title">{{ product.title | default: 'Product Title' }}</div>
+      <div class="product-price">
+        {% if product.price %}
+          {{ product.price | money_without_trailing_zeros }}
+        {% else %}
+          $0.00
+        {% endif %}
       </div>
+    </div>
+  </a>
 
+  <div class="button-class">
+    {% if product.variants.size > 1 %}
+      <button class="open-variant-overlay product-button" data-product-id="{{ product.id }}">Select Options</button>
+      {% render 'variants-overlay', product: product %}
+    {% elsif product.variants.size == 1 and product.variants.first.available %}
+      <form method="post" action="/cart/add" class="quick-add-form">
+        <input type="hidden" name="id" value="{{ product.variants.first.id }}">
+        <button type="submit" class="product-button">Quick Add</button>
+      </form>
     {% else %}
-      <a class="product-button" href="{{ product.url | default: '#' }}">Quick add</a>
+      <a class="product-button" href="{{ product.url | default: '#' }}">Show product</a>
     {% endif %}
   </div>
 </div>
+
 <script>
   document.addEventListener('DOMContentLoaded', function () {
-    // Open overlay
-    document.querySelectorAll('.open-variant-overlay').forEach((button) => {
-      button.addEventListener('click', () => {
-        const overlay = document.getElementById(`variant-overlay-${button.dataset.productId}`);
-        if (overlay) overlay.classList.add('active');
+    document.querySelectorAll('.product-card-link .product-button').forEach((button) => {
+      button.addEventListener('click', function (e) {
+        e.stopPropagation();
+        e.preventDefault();
       });
     });
+  });
 
-    // Close overlay on icon or outside
-    document.querySelectorAll('.variant-overlay').forEach((overlay) => {
-      const closeBtn = overlay.querySelector('.close-variant-overlay');
-      const content = overlay.querySelector('.variant-overlay-content');
-
-      closeBtn.addEventListener('click', () => overlay.classList.remove('active'));
-
-      overlay.addEventListener('click', (e) => {
-        if (!content.contains(e.target)) {
-          overlay.classList.remove('active');
-        }
-      });
-    });
-
-    // Add to cart + open cart drawer
-    document.querySelectorAll('.variant-form').forEach((form) => {
+  document.addEventListener('DOMContentLoaded', function () {
+    document.querySelectorAll('.quick-add-form').forEach((form) => {
       form.addEventListener('submit', function (e) {
         e.preventDefault();
+
         const formData = new FormData(form);
+
         fetch('/cart/add.js', {
           method: 'POST',
           body: formData,
@@ -67,8 +62,6 @@
         })
           .then((res) => res.json())
           .then((data) => {
-            const overlay = form.closest('.variant-overlay');
-            if (overlay) overlay.classList.remove('active');
             fetch('/cart.js')
               .then((res) => res.json())
               .then((cart) => {
