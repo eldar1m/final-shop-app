@@ -47,6 +47,9 @@
                   type="radio"
                   name="id"
                   value="{{ variant.id }}"
+                  {% if forloop.first and variant.available %}
+                    checked
+                  {% endif %}
                   {% unless variant.available %}
                     disabled
                   {% endunless %}
@@ -58,6 +61,12 @@
         {% else %}
           <span> Out of stock</span>
         {% endif %}
+      </div>
+
+      <div class="quantity-wrapper">
+        <button type="button" class="quantity-btn" data-change="-1">‹</button>
+        <input type="number" id="main-quantity" name="quantity" value="1" min="1" class="quantity-input">
+        <button type="button" class="quantity-btn" data-change="1">›</button>
       </div>
 
       <div class="product-actions">
@@ -95,6 +104,8 @@
     </div>
   </div>
 </div>
+
+{% render 'sticky-add-to-cart' %}
 
 <script>
   document.addEventListener('DOMContentLoaded', function () {
@@ -202,6 +213,17 @@
             }
           });
       });
+    });
+  });
+
+  document.querySelectorAll('.quantity-btn').forEach((btn) => {
+    btn.addEventListener('click', () => {
+      const wrapper = btn.closest('.quantity-wrapper');
+      const input = wrapper.querySelector('input[type="number"]');
+      const change = parseInt(btn.dataset.change, 10);
+      const newVal = Math.max(1, parseInt(input.value || '1', 10) + change);
+      input.value = newVal;
+      input.dispatchEvent(new Event('input')); // trigger two-way sync
     });
   });
 </script>
