@@ -1,42 +1,35 @@
-<nav class="pagination-circles">
-  <ul>
-    <li>
-      <a
-        href="{{ paginate.previous.url }}"
-        class="
-          arrow pagination-arrow-left
-          {% unless paginate.previous %}
-            disabled
-          {% endunless %}
-        "
-      >
-        {% render 'icon-chevron-left' %}
-      </a>
-    </li>
-
-    {% for part in paginate.parts %}
+<div class="pagination-wrapper">
+  <nav class="pagination-circles">
+    <ul>
       <li>
-        {% if part.is_link %}
-          <a href="{{ part.url }}" class="inactive">{{ part.title }}</a>
-        {% elsif part.title == '...' %}
-          <span class="ellipsis">…</span>
-        {% else %}
-          <span class="active">{{ part.title }}</span>
-        {% endif %}
+        <a
+          href="{{ paginate.previous.url }}"
+          class="arrow pagination-arrow-left{% unless paginate.previous %} disabled{% endunless %}"
+        >
+          {% render 'icon-chevron-left' %}
+        </a>
       </li>
-    {% endfor %}
 
-    <li>
-      <a
-        href="{{ paginate.next.url }}"
-        class="
-          arrow pagination-arrow-right{% unless paginate.next %}
-            disabled
-          {% endunless %}
-        "
-      >
-        {%- render 'icon-chevron-right' -%}
-      </a>
-    </li>
-  </ul>
-</nav>
+      {% for part in paginate.parts %}
+        <li>
+          {% if part.is_link %}
+            <a href="{{ part.url }}" class="inactive">{{ part.title }}</a>
+          {% elsif part.title == '...' %}
+            <span class="ellipsis">…</span>
+          {% else %}
+            <span class="active">{{ part.title }}</span>
+          {% endif %}
+        </li>
+      {% endfor %}
+
+      <li>
+        <a
+          href="{{ paginate.next.url }}"
+          class="arrow pagination-arrow-right{% unless paginate.next %} disabled{% endunless %}"
+        >
+          {% render 'icon-chevron-right' %}
+        </a>
+      </li>
+    </ul>
+  </nav>
+</div>
