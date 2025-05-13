@@ -145,12 +145,11 @@
         .then((data) => {
           console.log('Product added to cart:', data);
 
-          // Fetch and render updated cart
           fetch('/cart.js')
             .then((res) => res.json())
             .then((cart) => {
               if (typeof renderCart === 'function') {
-                renderCart(cart); // Make sure this function is globally available
+                renderCart(cart);
               }
               cartDrawer.classList.add('active');
               cartOverlay.classList.add('active');
@@ -162,7 +161,6 @@
     });
   });
 
-  // Fallback if Shopify.formatMoney doesn't exist
   if (typeof Shopify === 'undefined') {
     Shopify = {};
   }
@@ -201,14 +199,12 @@
       radio.addEventListener('change', function () {
         const variantId = this.value;
 
-        // Get variant data from Shopify
         fetch(`/products/{{ product.handle }}.js`)
           .then((res) => res.json())
           .then((productData) => {
             const selectedVariant = productData.variants.find((v) => v.id == variantId);
 
             if (selectedVariant) {
-              // Update price
               priceDisplay.innerText = Shopify.formatMoney(selectedVariant.price, '{{ shop.money_format }}');
             }
           });
@@ -223,7 +219,7 @@
       const change = parseInt(btn.dataset.change, 10);
       const newVal = Math.max(1, parseInt(input.value || '1', 10) + change);
       input.value = newVal;
-      input.dispatchEvent(new Event('input')); // trigger two-way sync
+      input.dispatchEvent(new Event('input'));
     });
   });
 </script>
