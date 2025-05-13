@@ -1,42 +1,129 @@
-// assets/collection-ajax.js
+const SECTION_ID = 'collection-products';
 
 document.addEventListener('DOMContentLoaded', () => {
-    const sortSelect = document.getElementById('sort-by');
-    const productsWrapper = document.querySelector('.collection-products');
-    const paginationWrapper = document.querySelector('.pagination-wrapper');
+    bindCollectionEvents();
 
-    // 1. Core fetch + replace routine
-    function fetchCollectionFragment(url) {
-        fetch(url)
-            .then(r => r.text())
-            .then(html => {
-                const doc = new DOMParser().parseFromString(html, 'text/html');
-                const newProducts = doc.querySelector('.collection-products');
-                const newPagination = doc.querySelector('.pagination-wrapper');
-
-                if (newProducts) productsWrapper.innerHTML = newProducts.innerHTML;
-                if (newPagination) paginationWrapper.innerHTML = newPagination.innerHTML;
-            })
-            .catch(err => console.error('Collection AJAX error:', err));
-    }
-
-    // 2. Sort dropdown — same as before
-    if (sortSelect) {
-        sortSelect.removeAttribute('onchange');
-        sortSelect.addEventListener('change', () => {
-            const params = new URLSearchParams(window.location.search);
-            params.set('sort_by', sortSelect.value);
-            params.delete('page');
-            fetchCollectionFragment(`${window.location.pathname}?${params}`);
-        });
-    }
-
-    // 3. Always catch pagination clicks via document-level delegation
-    document.addEventListener('click', e => {
-        // look up the chain for any <a> inside your pagination wrapper
+    document.addEventListener('click', (e) => {
         const link = e.target.closest('.pagination-wrapper a');
         if (!link) return;
         e.preventDefault();
-        fetchCollectionFragment(link.href);
+        const url = new URL(link.href);
+        const params = new URLSearchParams(url.search);
+        fetchAndReplaceSection(params);
     });
 });
+
+function fetchAndReplaceSection(params) {
+    const fetchUrl = `${window.location.pathname}?sections=${SECTION_ID}&${params.toString()}`;
+    fetch(fetchUrl)
+        .then(res => res.json())
+        .then(data => {
+            const html = data[SECTION_ID];
+            const section = document.getElementById(`shopify-section-${SECTION_ID}`);
+            if (section) {
+                section.innerHTML = html;
+                bindCollectionEvents();
+            }
+        });
+}
+
+function bindCollectionEvents() {
+    const sortSelect = document.getElementById('sort-by');
+    if (sortSelect) {
+        sortSelect.removeEventListener('change', handleSortChange);
+        sortSelect.addEventListener('change', handleSortChange);
+    }
+
+    document.querySelectorAll('.open-variant-overlay').forEach(btn => {
+        btn.removeEventListener('click', handleOverlayToggle);
+        btn.addEventListener('click', handleOverlayToggle);
+    });
+
+    document.querySelectorAll('.quick-add-form').forEach(form => {
+        form.removeEventListener('submit', handleQuickAdd);
+        form.addEventListener('submit', handleQuickAdd);
+    });
+
+    document.querySelectorAll('.variant-form').forEach(form => {
+        form.removeEventListener('submit', handleVariantAdd);
+        form.addEventListener('submit', handleVariantAdd);
+    });
+
+    document.querySelectorAll('.close-variant-overlay').forEach(btn => {
+        btn.removeEventListener('click', handleOverlayClose);
+        btn.addEventListener('click', handleOverlayClose);
+    });
+
+    document.querySelectorAll('.variant-overlay').forEach(overlay => {
+        overlay.removeEventListener('click', handleOverlayOutside);
+        overlay.addEventListener('click', handleOverlayOutside);
+    });
+}
+
+function handleSortChange(e) {
+    const params = new URLSearchParams(window.location.search);
+    params.set('sort_by', e.target.value);
+    params.delete('page');
+    fetchAndReplaceSection(params);
+}
+
+function handleOverlayToggle(e) {
+    e.preventDefault();
+    const id = e.currentTarget.getAttribute('data-product-id');
+    const overlay = document.getElementById(`variant-overlay-${id}`);
+    if (overlay) overlay.classList.add('active');
+}
+
+function handleOverlayClose(e) {
+    const overlay = e.currentTarget.closest('.variant-overlay');
+    if (overlay) overlay.classList.remove('active');
+}
+
+function handleOverlayOutside(e) {
+    const content = e.currentTarget.querySelector('.variant-overlay-content');
+    if (!content.contains(e.target)) {
+        e.currentTarget.classList.remove('active');
+    }
+}
+
+function handleQuickAdd(e) {
+    e.preventDefault();
+    const form = e.currentTarget;
+    fetch(form.action, {
+        method: 'POST',
+        body: new FormData(form),
+        headers: { 'Accept': 'application/json' }
+    })
+        .then(res => res.json())
+        .then(() => openCartDrawer())
+        .catch(err => console.error('Quick-add error:', err));
+}
+
+function handleVariantAdd(e) {
+    e.preventDefault();
+    const form = e.currentTarget;
+    fetch('/cart/add.js', {
+        method: 'POST',
+        body: new FormData(form),
+        headers: { 'Accept': 'application/json' }
+    })
+        .then(res => res.json())
+        .then(() => {
+            const overlay = form.closest('.variant-overlay');
+            if (overlay) overlay.classList.remove('active');
+            openCartDrawer();
+        })
+        .catch(err => console.error('Variant add error:', err));
+}
+
+function openCartDrawer() {
+    fetch('/cart.js')
+        .then(res => res.json())
+        .then(cart => {
+            if (typeof renderCart === 'function') {
+                renderCart(cart);
+            }
+            document.getElementById('cart-drawer')?.classList.add('active');
+            document.querySelector('.cart-drawer-overlay')?.classList.add('active');
+        });
+}

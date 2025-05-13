@@ -1,12 +1,12 @@
-<div class="collection-section">
+<div class="collection-section" id="shopify-section-collection-products">
   <div class="collection-sort">
     <form method="get" class="sort-dropdown">
       {% render 'icon-settings' %}
-
       <label for="sort-by" class="sort-label">Sort by</label>
 
       <div class="sort-select-wrapper">
-        <select name="sort_by" id="sort-by" onchange="this.form.submit()">
+        {%- comment -%} Removed inline onchange — now handled via JS {%- endcomment -%}
+        <select name="sort_by" id="sort-by">
           <option disabled></option>
           <option
             value="best-selling"
