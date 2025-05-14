@@ -300,6 +300,20 @@
     const hiddenInput = document.getElementById('selected-product-id');
     const subSelect = document.getElementById('subscription-plan-select');
     const oneTimeVariantId = '{{ product.variants.first.id }}';
+    const oneTimeInput = document.querySelector('input[value="one-time"]');
+    const subscribeInput = document.querySelector('input[value="subscribe"]');
+
+    function updateDisplayedPrice(variantId) {
+      fetch(`/variants/${variantId}.js`)
+        .then((res) => res.json())
+        .then((variant) => {
+          const priceElement = document.getElementById('product-price');
+          if (priceElement && variant && variant.price) {
+            priceElement.innerText = Shopify.formatMoney(variant.price, '{{ shop.money_format }}');
+          }
+        })
+        .catch((err) => console.error('Price update error:', err));
+    }
 
     purchaseTypeButtons.forEach((btn) => {
       btn.addEventListener('click', () => {
@@ -307,24 +321,26 @@
         btn.classList.add('active');
 
         const type = btn.dataset.type;
-        if (type === 'subscribe') {
-          subscriptionOptions.style.display = 'block';
-          hiddenInput.value = subSelect.value;
-        } else {
-          subscriptionOptions.style.display = 'none';
-          hiddenInput.value = oneTimeVariantId;
-        }
+        const variantId = type === 'subscribe' ? subSelect.value : oneTimeVariantId;
 
-        // Manually trigger input selection
+        hiddenInput.value = variantId;
+        updateDisplayedPrice(variantId);
+
+        subscriptionOptions.style.display = type === 'subscribe' ? 'block' : 'none';
+
         const input = btn.querySelector('input[type="radio"]');
         if (input) input.checked = true;
       });
     });
 
     subSelect.addEventListener('change', () => {
-      if (document.querySelector('input[value="subscribe"]').checked) {
+      if (subscribeInput.checked) {
         hiddenInput.value = subSelect.value;
+        updateDisplayedPrice(subSelect.value);
       }
     });
+
+    // Initial price set
+    updateDisplayedPrice(oneTimeVariantId);
   });
 </script>
