@@ -1950,6 +1950,32 @@ brand-logo-image svg {
   pointer-events: none;
 }
 
+.sticky-atc-info {
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: center;
+  align-content: center;
+  gap: 10px;
+}
+
+.sticky-atc-text {
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  flex-wrap: wrap;
+}
+
+.sticky-atc-image {
+  height: 80px;
+  width: 80px;
+}
+
+.sticky-atc-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
 .sticky-add-to-cart {
   position: fixed;
   bottom: -100px;
@@ -1958,7 +1984,7 @@ brand-logo-image svg {
   background: white;
   border-top: 1px solid #eee;
   display: flex;
-  justify-content: center;
+  justify-content: space-around;
   align-items: center;
   padding: 1rem;
   z-index: 1000;

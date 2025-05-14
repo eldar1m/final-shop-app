@@ -1,5 +1,15 @@
 <!-- Sticky Add to Cart Bar -->
 <div class="sticky-add-to-cart" id="sticky-add-to-cart">
+  <div class="sticky-atc-info">
+    <div class="sticky-atc-image">
+      <img src="{{ product.featured_image | img_url: 'small' }}" alt="{{ product.featured_image.alt }}">
+    </div>
+    <div class="sticky-atc-text">
+      {{ product.vendor }}
+      {{ product.title }}
+    </div>
+  </div>
+
   <form id="sticky-add-form">
     {% if product.variants.size > 1 %}
       <select id="sticky-variant-select" class="sticky-variant-select" name="id">
