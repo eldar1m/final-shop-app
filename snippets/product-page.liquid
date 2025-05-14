@@ -69,6 +69,43 @@
         <button type="button" class="quantity-btn" data-change="1">›</button>
       </div>
 
+      {% if product.metafields.custom.product_list %}
+        <div id="purchase-options" class="purchase-options">
+          <div class="purchase-toggle">
+            <label class="purchase-type active" data-type="one-time">
+              One Time Purchase
+              <input type="radio" name="purchase_type" value="one-time" checked hidden>
+            </label>
+
+            <label class="purchase-type" data-type="subscribe">
+              Subscribe & Save
+              <input type="radio" name="purchase_type" value="subscribe" hidden>
+            </label>
+
+            <div id="subscription-options" style="display: none;">
+              <select id="subscription-plan-select" class="subscription-select">
+                {% assign sub_products = product.metafields.custom.product_list.value %}
+                {% for sub_product in sub_products %}
+                  {% case forloop.index0 %}
+                    {% when 0 %}
+                      {% assign label = 'Monthly' %}
+                    {% when 1 %}
+                      {% assign label = 'Quarterly' %}
+                    {% when 2 %}
+                      {% assign label = 'Annually' %}
+                    {% else %}
+                      {% assign label = sub_product.title %}
+                  {% endcase %}
+                  <option value="{{ sub_product.variants.first.id }}">{{ label }}</option>
+                {% endfor %}
+              </select>
+            </div>
+          </div>
+
+          <input type="hidden" id="selected-product-id" name="id" value="{{ product.variants.first.id }}">
+        </div>
+      {% endif %}
+
       <div class="product-actions">
         <button
           type="submit"
@@ -220,6 +257,74 @@
       const newVal = Math.max(1, parseInt(input.value || '1', 10) + change);
       input.value = newVal;
       input.dispatchEvent(new Event('input'));
+    });
+  });
+
+  document.addEventListener('DOMContentLoaded', function () {
+    const oneTimeInput = document.querySelector('input[value="one-time"]');
+    const subscribeInput = document.querySelector('input[value="subscribe"]');
+    const subscriptionOptions = document.getElementById('subscription-options');
+    const variantSelect = document.getElementById('subscription-plan-select');
+    const hiddenProductIdInput = document.getElementById('selected-product-id');
+    const oneTimeDefaultVariantId = '{{ product.variants.first.id }}';
+
+    function updateProductId() {
+      if (subscribeInput.checked) {
+        hiddenProductIdInput.value = variantSelect.value;
+      } else {
+        hiddenProductIdInput.value = oneTimeDefaultVariantId;
+      }
+    }
+
+    // Toggle visibility of subscription options
+    subscribeInput.addEventListener('change', () => {
+      subscriptionOptions.style.display = 'block';
+      updateProductId();
+    });
+
+    oneTimeInput.addEventListener('change', () => {
+      subscriptionOptions.style.display = 'none';
+      updateProductId();
+    });
+
+    // Update product ID when a new subscription is selected
+    variantSelect.addEventListener('change', updateProductId);
+
+    // Set initial variant ID
+    updateProductId();
+  });
+
+  document.addEventListener('DOMContentLoaded', function () {
+    const purchaseTypeButtons = document.querySelectorAll('.purchase-type');
+    const subscriptionOptions = document.getElementById('subscription-options');
+    const hiddenInput = document.getElementById('selected-product-id');
+    const subSelect = document.getElementById('subscription-plan-select');
+    const oneTimeVariantId = '{{ product.variants.first.id }}';
+
+    purchaseTypeButtons.forEach((btn) => {
+      btn.addEventListener('click', () => {
+        purchaseTypeButtons.forEach((b) => b.classList.remove('active'));
+        btn.classList.add('active');
+
+        const type = btn.dataset.type;
+        if (type === 'subscribe') {
+          subscriptionOptions.style.display = 'block';
+          hiddenInput.value = subSelect.value;
+        } else {
+          subscriptionOptions.style.display = 'none';
+          hiddenInput.value = oneTimeVariantId;
+        }
+
+        // Manually trigger input selection
+        const input = btn.querySelector('input[type="radio"]');
+        if (input) input.checked = true;
+      });
+    });
+
+    subSelect.addEventListener('change', () => {
+      if (document.querySelector('input[value="subscribe"]').checked) {
+        hiddenInput.value = subSelect.value;
+      }
     });
   });
 </script>

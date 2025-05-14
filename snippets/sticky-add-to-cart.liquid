@@ -1,27 +1,44 @@
 <!-- Sticky Add to Cart Bar -->
 <div class="sticky-add-to-cart" id="sticky-add-to-cart">
   <form id="sticky-add-form">
-    <select id="sticky-variant-select" class="sticky-variant-select" name="id">
-      {% for variant in product.variants %}
-        <option
-          value="{{ variant.id }}"
-          {% if variant == product.selected_or_first_available_variant %}
-            selected
-          {% endif %}
-          {% unless variant.available %}
-            disabled
-          {% endunless %}
-        >
-          {{ variant.title }}
-        </option>
-      {% endfor %}
-    </select>
+    {% if product.variants.size > 1 %}
+      <select id="sticky-variant-select" class="sticky-variant-select" name="id">
+        {% for variant in product.variants %}
+          <option
+            value="{{ variant.id }}"
+            {% if variant == product.selected_or_first_available_variant %}
+              selected
+            {% endif %}
+            {% unless variant.available %}
+              disabled
+            {% endunless %}
+          >
+            {{ variant.title }}
+          </option>
+        {% endfor %}
+      </select>
+    {% elsif product.variants.size == 1 and product.variants.first.available %}
+      <input type="hidden" name="id" value="{{ product.variants.first.id }}">
+      <span class="only-one-size">Only one size</span>
+    {% else %}
+      <span class="only-one-size">Out of stock</span>
+    {% endif %}
+
     <div class="quantity-wrapper">
       <button type="button" class="quantity-btn" data-change="-1">‹</button>
       <input type="number" id="sticky-quantity" name="quantity" value="1" min="1" class="quantity-input">
       <button type="button" class="quantity-btn" data-change="1">›</button>
     </div>
-    <button type="submit" class="sticky-add-button">Add to Cart</button>
+
+    <button
+      type="submit"
+      class="sticky-add-button"
+      {% unless product.available %}
+        disabled
+      {% endunless %}
+    >
+      Add to Cart
+    </button>
   </form>
 </div>
 
@@ -43,18 +60,20 @@
     window.addEventListener('scroll', handleScroll);
     handleScroll();
 
-    variantRadios.forEach((radio) => {
-      radio.addEventListener('change', () => {
-        variantSelect.value = radio.value;
-      });
-    });
-
-    variantSelect.addEventListener('change', () => {
-      const selectedValue = variantSelect.value;
+    if (variantSelect) {
       variantRadios.forEach((radio) => {
-        radio.checked = radio.value === selectedValue;
+        radio.addEventListener('change', () => {
+          variantSelect.value = radio.value;
+        });
       });
-    });
+
+      variantSelect.addEventListener('change', () => {
+        const selectedValue = variantSelect.value;
+        variantRadios.forEach((radio) => {
+          radio.checked = radio.value === selectedValue;
+        });
+      });
+    }
 
     quantityInputSticky.addEventListener('input', () => {
       quantityInputMain.value = quantityInputSticky.value;
@@ -74,17 +93,14 @@
         headers: { Accept: 'application/json' },
       })
         .then((res) => res.json())
-        .then((data) => {
-          fetch('/cart.js')
-            .then((res) => res.json())
-            .then((cart) => {
-              if (typeof renderCart === 'function') {
-                renderCart(cart);
-              }
-              document.getElementById('cart-drawer')?.classList.add('active');
-              document.querySelector('.cart-drawer-overlay')?.classList.add('active');
-            });
-        });
+        .then(() => fetch('/cart.js'))
+        .then((res) => res.json())
+        .then((cart) => {
+          if (typeof renderCart === 'function') renderCart(cart);
+          document.getElementById('cart-drawer')?.classList.add('active');
+          document.querySelector('.cart-drawer-overlay')?.classList.add('active');
+        })
+        .catch(console.error);
     });
   });
 </script>
