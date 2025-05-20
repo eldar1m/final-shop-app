@@ -1,0 +1,213 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "hero_NA9yyt": {
+      "type": "hero",
+      "settings": {
+        "heading": "Choose your shoes with us.",
+        "subtext": "We will help you to choose the product that without the doubt suits you best. And we mean it",
+        "button_label": "Read More",
+        "button_link": "",
+        "shoe_image": "shopify://shop_images/white-nikes.png",
+        "background_image": "shopify://shop_images/hero-background.jpg"
+      }
+    },
+    "categories_phCEyB": {
+      "type": "categories",
+      "blocks": {
+        "collection_block_tLD7U3": {
+          "type": "collection_block",
+          "settings": {
+            "collection": "woman"
+          }
+        },
+        "collection_block_dXJffV": {
+          "type": "collection_block",
+          "settings": {
+            "collection": "men"
+          }
+        },
+        "collection_block_taG4UC": {
+          "type": "collection_block",
+          "settings": {
+            "collection": "kids"
+          }
+        }
+      },
+      "block_order": [
+        "collection_block_tLD7U3",
+        "collection_block_dXJffV",
+        "collection_block_taG4UC"
+      ],
+      "settings": {
+        "heading": "Shop by Categories",
+        "subtext": "Pick a category you need"
+      }
+    },
+    "products_zGbekh": {
+      "type": "products-section",
+      "settings": {
+        "heading": "Our Products",
+        "featured_products": "all",
+        "number_of_products_displayed": 8
+      }
+    },
+    "about_shop_xE6bhh": {
+      "type": "about-shop",
+      "blocks": {
+        "review_7Wcz7j": {
+          "type": "review",
+          "settings": {
+            "review_text": "“Eu dolor at venenatis aliquam velit et in consequat. Nam dui pulvinar consequat eleifend malesuada. Eu dolor at venenatis aliquam velit et in consequat. Nam dui pulvinar consequat eleifend malesuada. Eu dolor at venenatis aliquam velit et in consequat. Nam dui pulvinar consequat eleifend malesuada.”",
+            "review_author": ""
+          }
+        }
+      },
+      "block_order": [
+        "review_7Wcz7j"
+      ],
+      "settings": {
+        "about_title": "About Miralou",
+        "about_text": "Ut donec suscipit nunc volutpat faucibus. Ut penatibus etiam diam facilisi at nibh nulla auctor lorem. Accumsan vulputate euismod massa sit egestas. Aliquet a scelerisque enim, arcu rutrum adipiscing fringilla risus. Eget fringilla curabitur sed vulputate pretium, habitasse amet. Elementum odio sagittis, interdum elit ipsum. Volutpat erat ac eu aliquam turpis.",
+        "reviews_title": "What People Say About Us",
+        "brand_logo_1": "shopify://shop_images/adidas-logo.png",
+        "brand_logo_2": "shopify://shop_images/nike-logo.png",
+        "brand_logo_3": "shopify://shop_images/jordan-logo.png",
+        "brand_logo_4": "shopify://shop_images/converse-logo.png"
+      }
+    },
+    "latest_news_3mkUzM": {
+      "type": "latest-news",
+      "blocks": {
+        "image_NEkh4q": {
+          "type": "Image",
+          "settings": {
+            "image": "shopify://shop_images/ab028637ea019f71467a19be45b1798e.jpg"
+          }
+        },
+        "image_fmAWxP": {
+          "type": "Image",
+          "settings": {
+            "image": "shopify://shop_images/004abf25521e1209b509e613e2c6a512.jpg"
+          }
+        },
+        "image_bN7amB": {
+          "type": "Image",
+          "settings": {
+            "image": "shopify://shop_images/d570293be012667ef3b7d5dc85e7b968.jpg"
+          }
+        },
+        "image_wYiqHr": {
+          "type": "Image",
+          "settings": {
+            "image": "shopify://shop_images/6b63eede2231ae8fc691a1e943dc7028.jpg"
+          }
+        },
+        "image_86w3Hx": {
+          "type": "Image",
+          "settings": {
+            "image": "shopify://shop_images/66514808f114e0bace5f4c955fc40908.jpg"
+          }
+        },
+        "image_abCXgP": {
+          "type": "Image",
+          "settings": {
+            "image": "shopify://shop_images/9eab5a3adf8ec88abbac1250247b6d9f.jpg"
+          }
+        },
+        "image_HH8FmQ": {
+          "type": "Image",
+          "settings": {
+            "image": "shopify://shop_images/9e66007c47ba8873604062701abfa83b.jpg"
+          }
+        },
+        "image_kHKi94": {
+          "type": "Image",
+          "settings": {
+            "image": "shopify://shop_images/c507f26ad894b9bdbd24b7483d237ec7.jpg"
+          }
+        },
+        "image_8hUEM3": {
+          "type": "Image",
+          "settings": {
+            "image": "shopify://shop_images/ea109ebb31df50ee658514758cd1c1ea.jpg"
+          }
+        },
+        "image_dbbebt": {
+          "type": "Image",
+          "settings": {
+            "image": "shopify://shop_images/35590978081a1681b80e70621877e676.jpg"
+          }
+        },
+        "image_DwYfGR": {
+          "type": "Image",
+          "settings": {
+            "image": "shopify://shop_images/e295a1012545ddf625713cc77af1f8fc.jpg"
+          }
+        },
+        "image_KC4QMb": {
+          "type": "Image",
+          "settings": {
+            "image": "shopify://shop_images/547db773e16019159292e1f96e9055f1.jpg"
+          }
+        },
+        "image_Pjp8Ae": {
+          "type": "Image",
+          "settings": {
+            "image": "shopify://shop_images/9abd73f7d7234b83ba7639b5774b3a9a.jpg"
+          }
+        },
+        "image_meMNiY": {
+          "type": "Image",
+          "settings": {
+            "image": "shopify://shop_images/a36d471939fe6bea6dde326c1ae599fe.jpg"
+          }
+        }
+      },
+      "block_order": [
+        "image_NEkh4q",
+        "image_fmAWxP",
+        "image_bN7amB",
+        "image_wYiqHr",
+        "image_86w3Hx",
+        "image_abCXgP",
+        "image_HH8FmQ",
+        "image_kHKi94",
+        "image_8hUEM3",
+        "image_dbbebt",
+        "image_DwYfGR",
+        "image_KC4QMb",
+        "image_Pjp8Ae",
+        "image_meMNiY"
+      ],
+      "settings": {
+        "heading": "Latest News",
+        "subheading": "Nunc rhoncus auctor risus tempor lacus urna, id laoreet sed. Euismod nisl pellentesque risus cursus fringilla tincidunt volutpat, non."
+      }
+    },
+    "newsletter_CQWdxN": {
+      "type": "newsletter",
+      "settings": {
+        "heading": "OUR NEWSSELLER",
+        "placeholder": "Enter your e-mail",
+        "button_label": "Subscribe"
+      }
+    }
+  },
+  "order": [
+    "hero_NA9yyt",
+    "categories_phCEyB",
+    "products_zGbekh",
+    "about_shop_xE6bhh",
+    "latest_news_3mkUzM",
+    "newsletter_CQWdxN"
+  ]
+}
