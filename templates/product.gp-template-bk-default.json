@@ -8,13 +8,13 @@
  * ------------------------------------------------------------
  */
 {
-  "order": [
-    "template"
-  ],
   "sections": {
     "template": {
-      "settings": {},
-      "type": "product-page"
+      "type": "product-page",
+      "settings": {}
     }
-  }
+  },
+  "order": [
+    "template"
+  ]
 }
