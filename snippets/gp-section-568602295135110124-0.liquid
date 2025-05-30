@@ -1893,6 +1893,34 @@ text-transform: uppercase;
 }
       </style>
     
+  
+    <div
+      
+      style="--d:block;--d-tablet:block;--d-mobile:block;--bs:none;--bw:1px 1px 1px 1px;--bc:#121212;--shadow:none;--op:100%;--bgc:transparent;--bgi:url();--bgp:50% 50%;--bgs:cover;--bgr:no-repeat;--bga:scroll;--ta:left"
+      data-keep-class="true"
+      class="gd1aZdVWXf "
+    ><div>{% assign product_handle = 'starter-order' %}
+{% assign case_type = 1 %} <!-- Example: change this to 1, 2, or 3 based on the case type -->
+{% assign product = all_products[product_handle] %}
+{% assign display_price = 0 %}
+{% for variant in product.variants %}
+  {% case case_type %}
+    {% when 1 %}
+      {% if variant.option1 == '1 Jar' %}
+        {% assign display_price = variant.price %}
+      {% endif %}
+    {% when 2 %}
+      {% if variant.option1 == '2 Jars' %}
+        {% assign display_price = variant.price | divided_by: 2 %}
+      {% endif %}
+    {% when 3 %}
+      {% if variant.option1 == '4 Jars' %}
+        {% assign display_price = variant.price | divided_by: 4 %}
+      {% endif %}
+  {% endcase %}
+{% endfor %}
+<span>{{ display_price | money }}</span></div></div>
+  
     </div><div
       tag="Col" label="Block" type="component"
       style="--jc:start"
@@ -2091,7 +2119,7 @@ text-align: center;
 
 }
       </style>
-    <div gp-el-wrapper style="--d:block;--d-tablet:block;--d-mobile:block;--bs:none;--bw:1px 1px 1px 1px;--bc:#121212;--shadow:none;--op:100%" class="gSmNDRS86L ">
+    <div gp-el-wrapper style="--mb:0px;--d:block;--d-tablet:block;--d-mobile:block;--bs:none;--bw:1px 1px 1px 1px;--bc:#121212;--shadow:none;--op:100%" class="gSmNDRS86L ">
       
     {%- liquid
       assign inventory_quantity = variant.inventory_quantity | default: 0
@@ -2314,7 +2342,7 @@ text-align: center;
       
     <div
       parentTag="Col" id="gcC0dZbJJn" data-id="gcC0dZbJJn"
-        style="--pt:24px;--pb:24px;--d:grid;--d-tablet:grid;--d-mobile:grid;--bs:none;--bw:1px 1px 1px 1px;--bc:#121212;--shadow:none;--op:100%;--cg:8px;--pc:start;--gtc:minmax(0, 12fr);--gtc-mobile:minmax(0, 12fr);--w:var(--g-ct-w, 1200px);--w-tablet:var(--g-ct-w, 100%);--w-mobile:var(--g-ct-w, 100%);--h:auto;--bgc:transparent;--bgi:url();--bgp:50% 50%;--bgs:cover;--bgr:no-repeat;--bga:scroll"
+        style="--pt:16px;--pb:24px;--d:grid;--d-tablet:grid;--d-mobile:grid;--bs:none;--bw:1px 1px 1px 1px;--bc:#121212;--shadow:none;--op:100%;--cg:8px;--pc:start;--gtc:minmax(0, 12fr);--gtc-mobile:minmax(0, 12fr);--w:var(--g-ct-w, 1200px);--w-tablet:var(--g-ct-w, 100%);--w-mobile:var(--g-ct-w, 100%);--h:auto;--bgc:transparent;--bgi:url();--bgp:50% 50%;--bgs:cover;--bgr:no-repeat;--bga:scroll"
         class="gcC0dZbJJn gp-mx-auto gp-mb-0 gp-grid gp-max-w-full gp-gap-y-0 gp-transition-colors gp-duration-200 gp-ease-in-out [&_*]:gp-max-w-full gp-grid-rows-[1fr]"
     >
     <div
