@@ -9,16 +9,16 @@
  */
 {
   "sections": {
-    "gp_section_568883293655663596": {
+    "gp_section_568884044251530261": {
       "settings": {
-        "checksum": "495a79eee71a47a74e4569f035fd00a15006bcc31a19778cbe4d9e4ebfe3caf5_1_1_1_0_",
+        "checksum": "5494989a6dedcac1eb092c7a3b73024e9f3502eef03e1f4daff0a37a4a6f54c0_1_1_1_0_",
         "section_preload": "true"
       },
-      "type": "gp-section-568883293655663596"
+      "type": "gp-section-568884044251530261"
     }
   },
   "order": [
-    "gp_section_568883293655663596"
+    "gp_section_568884044251530261"
   ],
   "layout": "theme.gempages.blank"
 }
